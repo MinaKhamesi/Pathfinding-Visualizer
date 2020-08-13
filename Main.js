@@ -8,6 +8,7 @@ import Table from './TableClass.js';
 var mouseValue = 'wall';
 var mouseIsPressed = false;
 var weightIsSelected = false;
+
 var diagonalAllowed = false;
 var universalGrid = false;
 
@@ -187,90 +188,6 @@ var universalGrid = false;
     })
     
 
-/*
-    const allCells = document.querySelectorAll('.table .row span');
-
-   allCells.forEach(cell=>{
-
-    cell.addEventListener('mousedown',(e)=>{
-        mouseIsPressed = true;
-        if(e.target.classList.contains('start')){
-            mouseValue='start'
-        }else if(e.target.classList.contains('end')){
-            mouseValue='end'
-        }else if(e.target.classList.contains(mouseValue)){
-            e.target.classList.remove(mouseValue);
-        }else{
-            e.target.classList.add(mouseValue)
-        }
-    })
-
-    cell.addEventListener('mouseover',(e)=>{
-        if (e.target.classList.contains('start') || e.target.classList.contains('end')){
-            return}
-        if(mouseIsPressed && mouseValue!=='wall' && mouseValue!='weight'){
-            cell.className = mouseValue;
-        }else if(mouseIsPressed){
-            if (!e.target.classList.contains(mouseValue)){
-                e.target.className = mouseValue
-            }else{
-                e.target.classList.remove(mouseValue)
-            }
-        }
-    });
-
-    cell.addEventListener('mouseleave',(e)=>{
-            if(mouseIsPressed && mouseValue!='wall' && mouseValue!='weight'){
-                cell.classList.remove(mouseValue);
-            }
-    })
-
-    cell.addEventListener('mouseup',(e)=>{
-        
-            mouseIsPressed = false;
-            //check for weight 
-            if(weightIsSelected){
-                mouseValue = 'weight'
-            }else{
-                mouseValue = 'wall'
-            }
-    })
-})
-
-
-
-// If mouse go between tables everything back to normal
-const tableElements = document.querySelectorAll('.container .table');
-
-tableElements.forEach(table=>{
-    table.addEventListener('mouseleave',(e)=>{
-        if(mouseIsPressed && mouseValue=='start'){
-            document.querySelector(`#${e.target.id} #start`).className='start'
-        }else if(mouseIsPressed && mouseValue=='end'){
-            document.querySelector(`#${e.target.id} #end`).className = 'end'
-        }
-        mouseIsPressed=false;
-        if(weightIsSelected){
-            mouseValue='weight'
-        }else{
-            mouseValue='wall'
-        }
-    })
-
-    table.addEventListener('mouseup',()=>{
-        mouseIsPressed = false;
-        if(weightIsSelected){
-            mouseValue='weight';
-        }else{
-            mouseValue = 'wall';
-        }
-    })
-})
-
-
-}}
-
-setEventListeners(universalGrid);*/
 
 
 
@@ -634,24 +551,7 @@ uniGridBtn.addEventListener('click',e=>{
     }
     });
 
-/*const updateHTML = (table1,table2=null)=>{
-    const grid = document.querySelector(`#${table1.id} .grid`)
-    if(table2){
-        grid.innerHTML = document.querySelector(`#${table2.id} .grid`).innerHTML;
-    }else{
-        grid.innerHTML = '';
-        for(let row=0;row<30;row++){
-            const currentRow = document.createElement('div');
-            currentRow.className = 'row';
-            for(let col=0;col<60;col++){
-                const currentCol = document.createElement('span');
-                currentRow.appendChild(currentCol);
-            }
-            grid.appendChild(currentRow)
-        }
-    }
 
-}*/
 
 const updateHTML = (table,grid=null)=>{
     const currentGrid = document.querySelector(`#${table.id} .grid`);
