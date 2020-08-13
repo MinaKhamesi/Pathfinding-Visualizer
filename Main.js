@@ -9,10 +9,188 @@ var mouseValue = 'wall';
 var mouseIsPressed = false;
 var weightIsSelected = false;
 var diagonalAllowed = false;
+var universalGrid = false;
 
-const allCells = document.querySelectorAll('.table .row span');
 
-allCells.forEach(cell=>{
+
+
+    const cells1 = document.querySelectorAll(`#table-1 .row span`);
+    const cells2 = document.querySelectorAll(`#table-2 .row span`);
+    const cells3 = document.querySelectorAll(`#table-3 .row span`);
+    const cells4 = document.querySelectorAll(`#table-4 .row span`);
+    const allCells = [cells1, cells2, cells3, cells4];
+
+    allCells.forEach((cells,idx)=>cells.forEach((cell,index)=>{
+
+        cell.addEventListener('mousedown',(e)=>{
+            mouseIsPressed = true;
+            if(e.target.classList.contains('start')){
+                mouseValue='start'
+            }else if(e.target.classList.contains('end')){
+                mouseValue='end'
+            }else if(e.target.classList.contains(mouseValue)){
+                e.target.classList.remove(mouseValue);
+                if(universalGrid){
+                    for(let table=0;table<allCells.length;table++){
+                        if(table==idx) continue;
+                        for(let ele=0;ele<allCells[table].length;ele++){
+                            if(ele===index){
+                                allCells[table][ele].classList.remove(mouseValue)
+                            }
+                        }
+                    }
+                }
+                
+            }else{
+                e.target.classList.add(mouseValue)
+                if(universalGrid){
+                    for(let table=0;table<allCells.length;table++){
+                        if(table==idx) continue;
+                        for(let ele=0;ele<allCells[table].length;ele++){
+                            if(ele===index){
+                                allCells[table][ele].classList.add(mouseValue)
+                            }
+                        }
+                    }
+                }
+                
+            }
+        })
+
+
+        cell.addEventListener('mouseover',(e)=>{
+            if (e.target.classList.contains('start') || e.target.classList.contains('end')){
+                return}
+            if(mouseIsPressed && mouseValue!=='wall' && mouseValue!='weight'){
+                cell.className = mouseValue;
+                if(universalGrid){
+                    for(let table=0;table<allCells.length;table++){
+                        for(let ele=0;ele<allCells[table].length;ele++){
+                            if(ele===index){
+                                allCells[table][ele].className = mouseValue;
+                            }
+                        }
+                    }
+                }
+                
+
+            }else if(mouseIsPressed){
+                if (!e.target.classList.contains(mouseValue)){
+                    e.target.className = mouseValue;
+                    if(universalGrid){
+                        for(let table=0;table<allCells.length;table++){
+                            for(let ele=0;ele<allCells[table].length;ele++){
+                                if(ele===index){
+                                    allCells[table][ele].className = mouseValue;
+                                }
+                            }
+                        }
+                    }
+                    
+                }else{
+                    e.target.classList.remove(mouseValue)
+                    if(universalGrid){
+                        for(let table=0;table<allCells.length;table++){
+                            if(table==idx) continue;
+                            for(let ele=0;ele<allCells[table].length;ele++){
+                                if(ele===index){
+                                    allCells[table][ele].classList.remove(mouseValue)
+                                }
+                            }
+                        }
+                    }
+                    
+                }
+            }
+        });
+
+
+        cell.addEventListener('mouseleave',(e)=>{
+            if(mouseIsPressed && mouseValue!='wall' && mouseValue!='weight'){
+                cell.classList.remove(mouseValue);
+                if(universalGrid){
+                    for(let table=0;table<allCells.length;table++){
+                        for(let ele=0;ele<allCells[table].length;ele++){
+                            if(table==idx) continue;
+                            if(ele===index){
+                                allCells[table][ele].classList.remove(mouseValue);
+                            }
+                        }
+                    }
+                }
+                
+            }
+    })
+
+
+    cell.addEventListener('mouseup',(e)=>{
+        
+        mouseIsPressed = false;
+        //check for weight 
+        if(weightIsSelected){
+            mouseValue = 'weight'
+        }else{
+            mouseValue = 'wall'
+        }
+})
+
+
+
+    }));
+
+
+    const table1Element = document.getElementById('table-1');
+    const table2Element = document.getElementById('table-2');
+    const table3Element = document.getElementById('table-3');
+    const table4Element = document.getElementById('table-4');
+
+    const tableElements = [table1Element, table2Element, table3Element, table4Element];
+
+    tableElements.forEach((table,idx)=>{
+        table.addEventListener('mouseleave',(e)=>{
+            if(mouseIsPressed && mouseValue=='start'){
+                document.querySelector(`#${table.id} #start`).className='start';
+                if(universalGrid){
+                    for(let i=0;i<tableElements.length;i++){
+                        if(i==idx) continue;
+                        document.querySelector(`#${tableElements[i].id} #start`).className='start';
+                    }
+                }
+                
+                
+            }else if(mouseIsPressed && mouseValue=='end'){
+                document.querySelector(`#${table.id} #end`).className='end';
+                if(universalGrid){
+                    for(let i=0;i<tableElements.length;i++){
+                        if(i==idx) continue;
+                        document.querySelector(`#${tableElements[i].id} #end`).className='end';
+                    }
+                }
+                
+            }
+            mouseIsPressed=false;
+            if(weightIsSelected){
+                mouseValue='weight'
+            }else{
+                mouseValue='wall'
+            }
+        })
+    
+        table.addEventListener('mouseup',()=>{
+            mouseIsPressed = false;
+            if(weightIsSelected){
+                mouseValue='weight';
+            }else{
+                mouseValue = 'wall';
+            }
+        })
+    })
+    
+
+/*
+    const allCells = document.querySelectorAll('.table .row span');
+
+   allCells.forEach(cell=>{
 
     cell.addEventListener('mousedown',(e)=>{
         mouseIsPressed = true;
@@ -48,7 +226,7 @@ allCells.forEach(cell=>{
     })
 
     cell.addEventListener('mouseup',(e)=>{
-        console.log('mouse up')
+        
             mouseIsPressed = false;
             //check for weight 
             if(weightIsSelected){
@@ -60,8 +238,10 @@ allCells.forEach(cell=>{
 })
 
 
+
 // If mouse go between tables everything back to normal
 const tableElements = document.querySelectorAll('.container .table');
+
 tableElements.forEach(table=>{
     table.addEventListener('mouseleave',(e)=>{
         if(mouseIsPressed && mouseValue=='start'){
@@ -86,6 +266,13 @@ tableElements.forEach(table=>{
         }
     })
 })
+
+
+}}
+
+setEventListeners(universalGrid);*/
+
+
 
 //---------------------------------------------------------
 //           Handling checkboxes in controlPanel
@@ -285,8 +472,9 @@ mazeBtns.forEach(btn=>{
 
                     //#00 if there are any disabled checkbox make them abled:D
                     if(document.querySelectorAll(`.control-item:nth-child(2) > ul input[type="checkbox"]:disabled`).length>0){
-                        console.log('there is a disabled checkbock')
-                        document.querySelectorAll(`.control-item:nth-child(2) > ul input[type="checkbox"]:disabled`).forEach(checkbox=>checkbox.disabled = false)
+                        
+                        document.querySelectorAll(`.control-item:nth-child(2) > ul input[type="checkbox"]:disabled`).forEach(checkbox=>checkbox.disabled = false);
+
                     }
 
 
@@ -333,9 +521,12 @@ mazeBtns.forEach(btn=>{
     })
 })
 
+
+
 //------------------------------------------------------------------
 //               Options selection
 //------------------------------------------------------------------
+
 const allowDiagonalBtn = document.getElementById('diagonal');
 
 allowDiagonalBtn.addEventListener('change',(e)=>{
@@ -412,7 +603,71 @@ manhattanBtn.addEventListener('click',(e)=>{
     
 })
 
+//-----------------------------------
+//   setting universal grid for all tables
+//----------------------------------
 
+const uniGridBtn = document.getElementById('uniGrid');
+
+uniGridBtn.addEventListener('click',e=>{
+    universalGrid = e.target.checked ? true : false;
+    if(universalGrid){
+        for(let i=0;i<tables.length;i++){
+            if(tables[i].active){
+                tables[i].cleanBoard()
+            }
+        }
+    }
+    });
+
+/*const updateHTML = (table1,table2=null)=>{
+    const grid = document.querySelector(`#${table1.id} .grid`)
+    if(table2){
+        grid.innerHTML = document.querySelector(`#${table2.id} .grid`).innerHTML;
+    }else{
+        grid.innerHTML = '';
+        for(let row=0;row<30;row++){
+            const currentRow = document.createElement('div');
+            currentRow.className = 'row';
+            for(let col=0;col<60;col++){
+                const currentCol = document.createElement('span');
+                currentRow.appendChild(currentCol);
+            }
+            grid.appendChild(currentRow)
+        }
+    }
+
+}*/
+
+const updateHTML = (table,grid=null)=>{
+    const currentGrid = document.querySelector(`#${table.id} .grid`);
+    currentGrid.innerHTML = '';
+    if(grid){
+        for(let row=0;row<grid.length;row++){
+
+            const currentRow = document.createElement('div');
+            currentRow.className = 'row';
+           
+            for(let col=0;col<grid[0].length;col++){
+                let currentElement = grid[row][col];
+                console.log(currentElement);
+                currentRow.innerHTML = grid[row][col]
+            }
+
+            currentGrid.appendChild(currentRow)
+        }
+    }else{
+        for(let row=0;row<30;row++){
+            const currentRow = document.createElement('div');
+            currentRow.className = 'row';
+            for(let col=0;col<60;col++){
+                const currentCol = document.createElement('span');
+                currentRow.appendChild(currentCol);
+            }
+            currentGrid.appendChild(currentRow)
+        }
+    }
+}
 
 
 
@@ -437,7 +692,6 @@ visBtn.addEventListener('click',()=>{
     for(let i=0;i<tables.length;i++){
         if(tables[i].active){
             tables[i].cleanGrid();
-            console.log(manhattanDist)
             tables[i].runAlgo(diagonalAllowed,mazeSpeed,graphSpeed,manhattanDist);
         }
        

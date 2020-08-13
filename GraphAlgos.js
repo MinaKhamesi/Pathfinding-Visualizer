@@ -1,6 +1,6 @@
 
 export const    runAlgo = (algo,grid,start,end,diagonal,graphSpeed,manhattan) =>{
-    console.log(manhattan);
+   
     switch(algo){
         case 'A*':
             return AStart(grid, start, end, diagonal, graphSpeed,manhattan);
@@ -488,7 +488,7 @@ const gBFS = (grid, start, end, diagonal,graphSpeed,manhattan) =>{
 
     let [currentRow,currentCol] = start;
 
-    let currentHdist = (manhattan) ?  hDis(currentRow,currentCol,goalRow,goalCol,'Manhattan') : hDis(currentRow,currentCol,goalRow,goalCol) ;
+    let currentHdist = (manhattan) ?  hDis(goalRow,goalCol,currentRow,currentCol,'Manhattan') : hDis(goalRow,goalCol,currentRow,currentCol) ;
     
 
     pq.insert([currentHdist,[currentRow,currentCol]]);
@@ -534,9 +534,9 @@ const gBFS = (grid, start, end, diagonal,graphSpeed,manhattan) =>{
             let [row,col] = neighbors[i];
 
             if (visited[row][col]) continue;
-            let newHdist = (manhattan)?  hDis(currentRow,currentCol,goalRow,goalCol,'Manhattan') : hDis(currentRow,currentCol,goalRow,goalCol) ;
-            //let newHdist = currentHDist + weight[row][col];
 
+            let newHdist = (manhattan)?  hDis(row,col,goalRow,goalCol,'Manhattan') : hDis(row,col,goalRow,goalCol) ;
+            
             if (newHdist < Hdist[row][col]){
                 Hdist[row][col] = newHdist;
                 pq.insert([newHdist, [row,col]]);
@@ -556,7 +556,7 @@ const gBFS = (grid, start, end, diagonal,graphSpeed,manhattan) =>{
 
 
 const hDis = (row1,col1,row2,col2,distance='Euclidian')=>{
-    console.log('we are at hdis function' + distance);
+    
     switch(distance){
         case 'Euclidian':
             return Math.sqrt((row2-row1)**2 + (col2-col1)**2);

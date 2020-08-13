@@ -14,7 +14,9 @@
 </head>
 <body>
     <p class='title'>PathFinding Visualizer</p>
+
     <!--     Control Panel   -->
+
     <input type="checkbox" name="panel-toggle" id="panel-toggle">
     <label for="panel-toggle" id='panel-label'>+</label>
     <div class="control-panel">
@@ -81,8 +83,8 @@
                 <li><input type="checkbox" name="diagonal" id="diagonal">
                     <label for="diagonal">Allow Diagonal</label>
                 </li>
-                <li><input type="checkbox" name="uniqMaze" id="uniqMaze">
-                    <label for="uniqMaze">Unique Maze</label>
+                <li><input type="checkbox" name="uniGrid" id="uniGrid">
+                    <label for="uniGrid">Universal Grid</label>
                 </li>
                 <li><input type="checkbox" name="manhattan" id="manhattan">
                     <label for="manhattan">Manhattan distance</label>
@@ -105,8 +107,13 @@
         </div>
         <button type="submit" id='visBtn'>Visualize</button>
     </div>
+
+
+
+
     <!--    Alerts    -->
     <div class="alert"></div>
+
     
     <!--     Legend Menu   -->
     <input type="checkbox" name="legend" id="legend-btn"><label for="legend-btn"> Legend</label>
@@ -135,6 +142,8 @@
             </li>
         </ul>
     </div>
+
+
     <!--    Container and  Tables  -->
     <div class="container">
         <div class="table" id='table-1'>
@@ -147,6 +156,7 @@
                 <div class="duration">Duration : <span></span> ms</div>
                 <div class="blocks">Blocks: <span></span> </div>
             </div>
+            <div class="grid">
             <div class="row">
                 <span></span>
                 <span></span>
@@ -2007,6 +2017,7 @@
                 <span></span>
                 <span></span>
             </div>
+        </div>
         </div>
 
         <div class="table" id='table-2'>
@@ -2019,6 +2030,7 @@
                 <div class="duration">Duration : <span></span> ms</div>
                 <div class="blocks">Blocks: <span></span> </div>
             </div>
+            <div class="grid">
             <div class="row">
                 <span></span>
                 <span></span>
@@ -3880,6 +3892,7 @@
                 <span></span>
             </div>
         </div>
+    </div>
 
         <div class="table" id='table-3'>
             <div class="algo-title">
@@ -3891,6 +3904,7 @@
                 <div class="duration">Duration : <span></span> ms</div>
                 <div class="blocks">Blocks: <span></span> </div>
             </div>
+            <div class="grid">
             <div class="row">
                 <span></span>
                 <span></span>
@@ -5752,6 +5766,7 @@
                 <span></span>
             </div>
         </div>
+    </div>
 
         <div class="table" id='table-4'>
             <div class="algo-title">
@@ -5763,6 +5778,7 @@
                 <div class="duration">Duration : <span></span> ms</div>
                 <div class="blocks">Blocks: <span></span> </div>
             </div>
+            <div class="grid">
             <div class="row">
                 <span></span>
                 <span></span>
@@ -7624,6 +7640,7 @@
                 <span></span>
             </div>
         </div>
+    </div>
         
     </div>
 

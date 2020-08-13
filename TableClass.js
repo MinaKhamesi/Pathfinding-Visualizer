@@ -53,11 +53,12 @@ export default class Table{
 
         document.getElementById('panel-toggle').disabled = true;
 
-        const [start,end] = this.getGrid();
+        let [start,end] = this.getGrid();
         
         let mazeDelay = 0;
         if(this.mazeAlgo){
             this.cleanBoard();
+            [start,end] = this.getGrid();
            mazeDelay = generateMaze(this.mazeAlgo, this.grid,mazeSpeed)
         }
 
@@ -91,14 +92,15 @@ export default class Table{
         const grid = []
         let start;
         let end;
-        const table = document.querySelector(`#${this.id}`);
-        for(let i=3; i<table.children.length; i++){
-            const row = table.children[i].children;
+        const gridEle = document.querySelector(`#${this.id} .grid`);
+        
+        for(let i=0; i<gridEle.children.length; i++){
+            const row = gridEle.children[i].children;
             const currentRow = []
             for(let j=0; j<row.length; j++){
                 currentRow.push(row[j]);
-                if (row[j].classList.contains('start')) start=[i-3,j];
-                if (row[j].classList.contains('end'))    end=[i-3,j];
+                if (row[j].classList.contains('start')) start=[i,j];
+                if (row[j].classList.contains('end'))    end=[i,j];
             }
             grid.push(currentRow);
         }
@@ -132,6 +134,14 @@ export default class Table{
             if (cell.classList.contains('weight')){
                 cell.classList.remove('weight');
             }
+            if(cell.classList.contains('start')){
+                cell.classList.remove('start')
+            }
+            if(cell.classList.contains('end')){
+                cell.classList.remove('end')
+            }
+            document.querySelector(`#${this.id} #start`).className='start';
+            document.querySelector(`#${this.id} #end`).className='end';
         }))
     }
 
