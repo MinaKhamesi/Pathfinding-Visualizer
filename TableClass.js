@@ -134,16 +134,22 @@ export default class Table{
             if (cell.classList.contains('weight')){
                 cell.classList.remove('weight');
             }
-            if(cell.classList.contains('start')){
-                cell.classList.remove('start')
-            }
-            if(cell.classList.contains('end')){
-                cell.classList.remove('end')
-            }
-            document.querySelector(`#${this.id} #start`).className='start';
-            document.querySelector(`#${this.id} #end`).className='end';
         }))
     }
+
+    resetBoard(){
+        if(this.inprogress) return;
+        this.cleanBoard();
+        this.grid.map(row=>row.map(cell=>{
+        if(cell.classList.contains('start')){
+            cell.classList.remove('start')
+        }
+        if(cell.classList.contains('end')){
+            cell.classList.remove('end')
+        }
+        document.querySelector(`#${this.id} #start`).className='start';
+        document.querySelector(`#${this.id} #end`).className='end';
+    }))}
 
 
 

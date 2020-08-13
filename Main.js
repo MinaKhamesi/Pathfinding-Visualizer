@@ -319,6 +319,7 @@ var tables = [table1,table2,table3,table4]
 //                  Graph Algorithm Selection
 //--------------------------------------------------------------------
 const algosBtns = document.querySelectorAll(`.control-item:first-child ul input[type='checkbox']`)
+
 algosBtns.forEach(btn=>{
     btn.addEventListener('change',(e)=>{
 
@@ -423,6 +424,7 @@ algosBtns.forEach(btn=>{
 //----------------------------------------------------------------------
 
 const mazeBtns = document.querySelectorAll(`.control-item:nth-child(2) ul input[type='checkbox']`)
+
 mazeBtns.forEach(btn=>{
     btn.addEventListener('change',(e)=>{
         if(e.target.checked){
@@ -545,15 +547,27 @@ weightBtn.addEventListener('change',(e)=>{
     mouseValue = e.target.checked ? 'weight' : 'wall';
 });
 
+
+//--------Clean Tables Buttons--------
+
 const cleanBtns = document.querySelectorAll(`.table > i`);
+
 cleanBtns.forEach(btn=>{
 
     btn.onclick = (e)=>{
+        if(universalGrid){
+            tables.forEach(table=>table.active && table.cleanGrid());
+            return;
+        }
         tables.forEach(table=>table.id===e.target.parentElement.id && table.cleanGrid())
     }
 
     btn.ondblclick = (e)=>{
-        tables.forEach(table=>table.id===e.target.parentElement.id && table.cleanBoard())
+        if(universalGrid){
+            tables.forEach(table=> table.active && table.resetBoard());
+            return;
+        }
+        tables.forEach(table=>table.id===e.target.parentElement.id && table.resetBoard())
     }
 
 })
@@ -614,7 +628,7 @@ uniGridBtn.addEventListener('click',e=>{
     if(universalGrid){
         for(let i=0;i<tables.length;i++){
             if(tables[i].active){
-                tables[i].cleanBoard()
+                tables[i].resetBoard();
             }
         }
     }
