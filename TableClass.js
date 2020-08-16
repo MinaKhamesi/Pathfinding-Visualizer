@@ -72,19 +72,22 @@ export default class Table{
                         this.inProgress = false;
                         document.getElementById('panel-toggle').disabled = false;
                     }, delay);
-    
                     
                 }else{
                     this.showMessage('Path Not Found!');
                     this.inProgress = false;
                     document.getElementById('panel-toggle').disabled = false;
+                    return mazeDelay;
                 }
             
+            }else{
+                this.inProgress = false;
+                document.getElementById('panel-toggle').disabled = false;
             }
         },mazeDelay);
         
-        this.inProgress = false;
-        document.getElementById('panel-toggle').disabled = false;
+        //this.inProgress = false;
+        //document.getElementById('panel-toggle').disabled = false;
     }
 
 

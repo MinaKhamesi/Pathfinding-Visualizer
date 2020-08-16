@@ -197,9 +197,8 @@ const dfs = (grid, start, end, diagonal,graphSpeed) =>{
 
     let nodesToVisit = [start];
 
-    let counter = 0
-    while (nodesToVisit.length>0 && counter<1600){
-        counter += 1;
+   
+    while (nodesToVisit.length>0 ){
 
         [currentRow,currentCol] = nodesToVisit.pop();
 

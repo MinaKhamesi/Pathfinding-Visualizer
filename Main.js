@@ -12,6 +12,8 @@ var weightIsSelected = false;
 var diagonalAllowed = false;
 var universalGrid = false;
 
+//var inProgress = false;
+
 
 
 
@@ -534,6 +536,7 @@ manhattanBtn.addEventListener('click',(e)=>{
     
 })
 
+
 //-----------------------------------
 //   setting universal grid for all tables
 //----------------------------------
@@ -553,37 +556,6 @@ uniGridBtn.addEventListener('click',e=>{
 
 
 
-const updateHTML = (table,grid=null)=>{
-    const currentGrid = document.querySelector(`#${table.id} .grid`);
-    currentGrid.innerHTML = '';
-    if(grid){
-        for(let row=0;row<grid.length;row++){
-
-            const currentRow = document.createElement('div');
-            currentRow.className = 'row';
-           
-            for(let col=0;col<grid[0].length;col++){
-                let currentElement = grid[row][col];
-                console.log(currentElement);
-                currentRow.innerHTML = grid[row][col]
-            }
-
-            currentGrid.appendChild(currentRow)
-        }
-    }else{
-        for(let row=0;row<30;row++){
-            const currentRow = document.createElement('div');
-            currentRow.className = 'row';
-            for(let col=0;col<60;col++){
-                const currentCol = document.createElement('span');
-                currentRow.appendChild(currentCol);
-            }
-            currentGrid.appendChild(currentRow)
-        }
-    }
-}
-
-
 
 
 
@@ -594,21 +566,25 @@ const visBtn = document.getElementById('visBtn')
 
 visBtn.addEventListener('click',()=>{
 
-    const algos = document.querySelectorAll(`.control-item > ul input:checked`);
+    const algos = document.querySelectorAll(`.control-item:nth-child(1) > ul input:checked, .control-item:nth-child(2) > ul input:checked`);
+
     if(algos.length===0){
         showMessage('please select an algorithm to visualize.')
         return
     }
 
     document.getElementById("panel-toggle").checked = false;
-    
+
+    //inProgress = true;
+
+    let allActiveTablesProgress = []
 
     for(let i=0;i<tables.length;i++){
         if(tables[i].active){
             tables[i].cleanGrid();
             tables[i].runAlgo(diagonalAllowed,mazeSpeed,graphSpeed,manhattanDist);
-        }
-       
+            allActiveTablesProgress.push(tables[i].inProgress);
+        } 
     }
 
 
@@ -621,5 +597,151 @@ const showMessage = (msg) =>{
         document.querySelector('.alert').classList.remove('active');
     }, 5000)
    
+}
+
+
+
+
+
+
+
+
+
+
+
+//-----------------------------------------------------------
+//                    Showing Toturials
+//------------------------------------------------------------
+
+const graphCheckboxs = document.querySelectorAll(`.table .algo-title input[type='checkbox']`);
+
+const toturial = document.querySelector('.toturial');
+
+graphCheckboxs.forEach(checkbox=>checkbox.addEventListener('click',e=>{
+    
+    if(e.target.checked){
+        toturial.classList.remove('hidden');
+       
+        populateToturialDiv(e.target.nextElementSibling.innerText);
+        
+    }else{
+        toturial.classList.add('hidden');
+
+        for(let i=0;i<graphCheckboxs.length;i++){
+            graphCheckboxs[i].checked = false;
+        }
+
+        populateToturialDiv('jjj')
+    }
+}));
+
+
+const populateToturialDiv = (algoName) =>{
+    const title = document.querySelector(' .toturial .title');
+    const desc = document.querySelector('.toturial .description');
+    const backFace = document.querySelector('.toturial .back-face p')
+    switch (algoName){
+        case "Dijkstra's algorithm":
+            title.innerText = "Dijkstra's algorithm";
+
+            desc.innerText = `Dijkstra will evaluate the distance from start node at every move and it will visit the node with the cheapest cost at every move.It is a weighted algorithm and will take into account the cost of every node. Dijkstra will provide a shortest path with cheapest cost.`
+           
+            backFace.innerText = `In this application dijkstra was implemented with a priority queue(i.e with a min heap) to keep track of cheapest node available at all time. 
+            you can add weighted cells to the grid by selecting the designated option, to see how the algorithm tries to avoid them. Every weighted cells, in this application, is twenty times more costly than a regular cell.`
+
+            return;
+
+        case "A*":
+            title.innerText = "A* algorithm";
+
+            desc.innerText = `A* is the most popular choice for pathfinding, because it’s fairly flexible and can be used in a wide range of contexts.
+
+            A* will consider the distance from the start node as well as the estimated distance from goal node in every step. And then it will choose the cheapest path at every move based on this totual cost function.
+            `;
+
+            backFace.innerText = `A* is like Dijkstra’s Algorithm in that it can be used to find a shortest path. A* is like Greedy Best-First-Search in that it can use a heuristic to guide itself. 
+            In other words, A* is faster and smarter than Dijkstra.That is, it will find a shortest path with visiting less nodes. And it is more careful than Greedy best first search in choosing its path.That is, it will examin more cells but it can garantee a shortest path.`;
+
+            return;
+
+       case "greedy BFS":
+        title.innerText = "Greedy Best-First Search";
+
+        desc.innerText = `The algorithm will start from start node. it evaluates all its neighbors base on a heuristic function, to see how far each node is from the goal, and then it will choose the node with least distance from the goal. Greedy BFS is not guaranteed to find a shortest path. However, it runs much quicker than Dijkstra because it uses the heuristic function to guide its way towards the goal very quickly.`;
+
+        backFace.innerText = `
+        In this application the default heuristic function is based on 'Euclidean distance' of each node from the goal. However you can select 'Manhattan distance' from options to see how the behavior of gbfs and A* will slightly change. Every heuristic function will work as long as it is consistent and it does not over estimate the distance.
+        Since the algorithm is greedy and choose the best move at the moment, you can see how it will get stuck in obstacles.`;
+
+        return;
+
+        case "Depth-First Search":
+            title.innerText = "Depth-First Search";
+
+            desc.innerText =`DFS starts at the start node and explores one possible path until it eighther reaches to the end node or to a point that there is no other unvisited node left. After reaching to the end of one path, it will backtrack to explore other possible paths.`;
+
+            backFace.innerText = `Depth-First search will not provide a shortest path. It will only tell you if a path exist. Also it is not a weighted algorithm.You can see if you make some cells weighted, the algorithm will treat them the same as other unweighted nodes.
+            DFS can be implemented recursively, or iteratively. In this application DFS was implemented iteratively with the help of a stack.`
+
+        return;
+
+
+        case "Breadth-First Search":
+            title.innerText = "Breadth-First Search";
+          
+            desc.innerText = `BFS explores nodes level by level. That is, after visiting start node, it will visit all neighbors(or children in a tree traversal) of start node before going to next level and it will keep doing this process until it reaches the end node.`;
+
+            backFace.innerText = `BFS is not a weighted algorithm. That is, it will treat all nodes the same regardless of them having different costs. But it will find a shortest path(only based on the number of nodes visited).
+            BFS was implemented by a "queue".In grids without any weighted node,Breadth-first search  will behave exactly like dijkstra . You can see that by visualizing both algorithms at same time with a same grid without weighted cells.
+            You can create exact same grids with 'Universal Grid' option. `;
+
+        return;
+
+
+        case "Recursive Backtracker":
+            title.innerText = "Recursive Backtracker";
+            desc.innerText = `This algorithm is a randomized version of the depth-first search algorithm. It chooses a cell, selects one of its unseen neighbors and destroys the wall between them. It keeps doing this process until it reaches a cell with no unseen neighbor. At this point It backtracks until it sees a new cell or the maze is done.`;
+            backFace.innerText = `For implementing resursive backtracker maze generation algorithm, in this application, evry other node was considered walls of its neighbors. Therfore the neighbors of each cell is actually two cells away from the current cell, and the rest of the algorithm is the same as described before.`
+        return;
+
+
+        case "Recursive Division":
+            title.innerText = "Recursive Division";
+            desc.innerText = `This algorithm makes horizontal or vertical walls at every step(based on the width and height of current area), and make a passage in this wall. The algorithm will call itself on two areas created by the wall. The process will continue until reaching minimum area eligible. At this point function will return and maze is done.`;
+            backFace.innerHTML = `You can see my github repo to see the code
+             <a href='http://github.com/mina801' target='_blank'>Check out my github</a>`
+        return;
+
+
+        case "Randomized Prim":
+            title.innerText = "Randomized Prim's algorithm";
+            desc.innerText = `This algorithm is a randomized version of Prim's algorithm.Algorithm starts with a grid full of walls. It picks a cell, marks it as part of the maze. Add the walls of the cell to the wall list.And while there are walls in the wall list, it picks a random wall from the list. Pops it and if only one of the two cells that the wall divides is visited, then it makes the wall a passage and marks the unvisited cell as part of the maze. And adds the neighboring walls to the wall list.`;
+            backFace.innerHTML = `To implement this algorithm in a grid of rows and columns, like in recursive backtracker algorithm, every other node is treated like a wall and neighbors are actually two cells away from each other.
+             I actually kept track of frontiers, the cells that at least one of their neighbors has been visited and is part of the maze. And every time one of them is selected from the frontier list, the algorithm makes the frontier and also the wall between frontier and its visited neighbor(aka, the cells that behave like a wall in this implementation) a passage. The process will continue as long as there are frontiers left.`;
+        return;
+
+
+        case "spiral":
+            title.innerText = "Spiral algorithm";
+            desc.innerText = `This is a very simple 2-D matrix traversal algorithm. While the width or height is not less than a threshold, the algorithm will visit the first row, last column, last row and first column in this order and after each iteration these variables will increment and decrement to make traversal possible.`;
+            backFace.innerHTML = `You can see my github repo to see the code
+             <a href='http://github.com/mina801' target='_blank'>Check out my github</a>`
+        return;
+
+
+        case "diagonal steps":
+            title.innerText = "diagonal steps algorithm";
+            desc.innerText = `This is a very simple 2D matrix traversal. It is exactly written as you see it in the visualization. The algorithm has a "going-up" variable that while true it will go up diagonally,that is decrementing row while incrementing column number until we either reach first row or last culumn and then we go down until reaching either first column or last row.`;
+            backFace.innerHTML = `You can see my github repo to see the code
+             <a href='http://github.com/mina801' target='_blank'>Check out my github</a>`
+        return;
+
+
+        default:
+            title.innerText = '';
+            desc.innerText = '';
+            backFace.innerText = '';
+            return;
+    }
 }
 

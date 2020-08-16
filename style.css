@@ -413,6 +413,85 @@ body> input:checked ~  .control-panel button{
     background-color: rgb(238, 251, 57);
 }
 
+/*----------------------------------------
+       Toturial Div
+------------------------------------------*/
+.toturial{
+    height:60%;
+    width: 40%;
+    padding:0;
+    position: absolute;
+    text-align: center;
+    z-index:100;
+    top:50%;
+    transform: translateY(-50%);
+    display: block;
+    transition:all 0.1s ease-out;
+}
+
+.toturial.hidden{
+    width:0;
+    height:0;
+    padding: 0;
+    box-shadow: none;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.front-face, .back-face{
+    box-shadow: 5px 5px 50px #000, -10px -10px 50px #fff,
+    inset  1px 1px 20px rgba(240, 75, 240, 0.3),inset -1px -1px 20px rgba(240, 75, 240, 0.3);
+    background: #fff;
+    border-radius: 10px;
+}
+
+.toturial .front-face, .toturial .back-face{
+    position: absolute;
+    backface-visibility: hidden;
+    padding: 0;
+    width: 100%;
+    height:100%;
+    transition: transform 0.4s linear;
+}
+
+.back-face{
+    transform:perspective(1000px) rotateY(-180deg);
+}
+.front-face{
+    transform:perspective(1000px) rotateY(0);
+}
+
+.toturial:hover .back-face{
+    transform:perspective(1000px) rotateY(0);
+}
+.toturial:hover .front-face{
+    transform:perspective(1000px) rotateY(180deg);
+}
+
+.toturial .title{
+  letter-spacing: 0.2rem;
+  font-size: 1.3rem;
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+}
+.toturial .title::after{
+    content:'';
+    width: 40%;
+    height:0.15rem;
+    background: #000;
+    position: absolute;
+    top:3.8rem;
+    left:50%;
+    transform:translateX(-50%);
+}
+
+.toturial .description, .toturial .back-face p{
+    padding: 1.5rem;
+    text-align: justify;
+    font-size: 1.15rem;
+    line-height: 1.5;
+    overflow: hidden;
+}
 
 
 
@@ -486,8 +565,12 @@ body> input:checked ~  .control-panel button{
     line-height: 2rem;
     box-shadow: inset  1px 1px 20px rgba(240, 75, 240, 0.3),inset -1px -1px 20px rgba(240, 75, 240, 0.3) ;
 }
+.table .algo-title input[type='checkbox']{
+    display: none;
+}
 .table .algo-title .graph-algo, .table .algo-title .maze-algo{
     cursor: pointer;
+    display: block; 
 }
 .table .duration-msg{
     position: absolute;
@@ -595,7 +678,12 @@ body> input:checked ~  .control-panel button{
      }
 }
 
-
+@media (max-width: 880px){
+    .toturial{
+        height:60%;
+        width: 60%;
+    }
+}
 
 @media (max-width: 700px){
     :root{
@@ -613,6 +701,10 @@ body> input:checked ~  .control-panel button{
     }
     .container.multiple{
         grid-template-columns: 1fr;
+    }
+    .toturial{
+        height:60%;
+        width: 50%;
     }
 }
 
