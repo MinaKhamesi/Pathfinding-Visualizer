@@ -13,12 +13,99 @@
     <title>PathFinding Visualizer</title>
 </head>
 <body>
-    <p class='title'>PathFinding Visualizer</p>
+    <p class='title'>PathFinding Visualizer <i class="fa fa-info-circle"></i>  </p>
+
+    
+    <!--          Instructions         -->
+
+
+    <div class="instruction-start instruction hidden">
+        <i class="fa fa-arrow-circle-left"></i>
+        <p class="massage">Please open the menu to see algorithms and other options</p>
+    </div>
+
+    <div class="instruction instruction-algos hidden">
+        <i class="fa fa-arrow-circle-left"></i>
+        <p class="massage">Open all sections to familiarize yourself with all algorithms. You can select up to four PathFinding algorithms AND four maze generation algorithms at a time in order to compare them.
+            <br/>
+            <a href='#' class='next'>next</a>
+            <a href="#"class='skip'>skip</a>
+        </p>
+    </div>
+
+    <div class="instruction instruction-options hidden">
+        <i class="fa fa-arrow-circle-left"></i>
+        <p class="massage">Open up the options section, where you can select the option that allows you to draw weighted cells in mazes.You also can synchronize all active mazes, with 'Universal Grid' option, in order to make the exact same mazes for comparison, allow diagonal movements for algorithms, change the default heuristic function from 'Euclidean' to 'Manhattan' distance or customize the speed of visualization process.
+            <br/>
+            <a href='#' class='next'>next</a>
+            <a href="#" class='skip'>skip</a>
+        </p>
+    </div>
+
+    <div class="instruction instruction-visBtn hidden">
+        <p class="massage">After selecting all your desired algorithms, click on 'Visualize' to see how they perform.
+            <br/> 
+            <a href='#' class='next'>next</a>
+            <a href="#" class='skip'>skip</a>
+        </p>
+        <i class="fa fa-arrow-circle-left"></i>
+    </div>
+    <div class="instruction instruction-table-title hidden">
+        <i class="fa fa-arrow-circle-left"></i>
+        <p class="massage">Title of algorithms allocated to each maze will appear on top left corner of each active maze. You can click on them to see a short description of the algorithm.
+            <br/>
+            <a href='#' class='next'>next</a>
+            <a href="#" class='skip'>skip</a>
+        </p>
+    </div>
+
+    <div class="instruction instruction-table-desc hidden">
+        <p class="massage">You can move start and end nodes by grabbing them and moving them around. Also you can draw walls(or weighted cells if you have selected 'Add weighted cells' from options) by clicking at a cell and moving the mouse around.
+            <br/>
+            <a href='#' class='next'>next</a>
+            <a href="#" class='skip'>skip</a>
+        </p>
+        <i class="fa fa-arrow-circle-down"></i>
+    </div>
+
+    <div class="instruction instruction-table-cleanbtn hidden">
+        <i class="fa fa-arrow-circle-right"></i>
+        <p class="massage">You can clean the maze from paths by clicking on this button. Also you can reset the maze by double clicking on the button.
+            <br/>
+            <a href='#' class='next'>next</a>
+            <a href="#" class='skip'>skip</a>
+        </p>
+    </div>
+    <div class="instruction instruction-table-time hidden">
+        <p class="massage">The time it takes for pathfinding algorithms to find a path, and number of blocks they passed to reach to the end will be available on the right-buttom corner of each maze after visualization is done.
+            <br/>
+            <a href='#' class='next'>next</a>
+            <a href="#" class='skip'>skip</a>
+        </p>
+        <i class="fa fa-arrow-circle-right"></i>
+    </div>
+    <div class="instruction instruction-legend hidden">
+        <i class="fa fa-arrow-circle-right"></i>
+        <p class="massage">You can click on the legend to see the description of all the nodes you might see on the board. 
+            <br/>
+            <a href='#' class='next'>next</a>
+            <a href="#" class='skip'>skip</a>
+        </p>
+    </div>
+    <div class="instruction instruction-end hidden">
+        <i class="fa fa-arrow-circle-up"></i>
+        <p class="massage">Well, have fun. And make sure you take advantage of all features available. If you wanted to see instructions again, click on info button next to the title. 
+            <br/>
+            <a href="#" class='skip'>close</a>
+        </p>
+    </div>
+
 
     <!--     Control Panel   -->
 
     <input type="checkbox" name="panel-toggle" id="panel-toggle">
     <label for="panel-toggle" id='panel-label'>+</label>
+
     <div class="control-panel">
         <div class="control-item">
             <input type="checkbox" name="algos" id="algo-toggle">

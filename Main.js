@@ -1,6 +1,78 @@
 import Table from './TableClass.js';
 
+//---------------------------------------------------------
+//          Instruction GuildLines
+//---------------------------------------------------------
+var instructionInProgress = true;
+document.querySelector('.instruction-start').classList.remove('hidden');
 
+// making first guild disappear is taking care of by clicking on menu.I wrote it on toturial section.
+
+let allInstructionsNext = document.querySelectorAll('.instruction .next');
+allInstructionsNext.forEach(nextBtn=>{
+    nextBtn.onclick = function(e){
+        let parent = e.target.parentElement.parentElement;
+        parent.classList.add('hidden');
+        let nextGuild = parent.nextElementSibling;
+        nextGuild.classList.remove('hidden');
+        //if it is algo or option or vis make sure control-panel is open
+        if (nextGuild.classList.contains('instruction-algos') ||nextGuild.classList.contains('instruction-options') || nextGuild.classList.contains('instruction-visBtn')){
+            let controlPanelBtn = document.getElementById('panel-toggle');
+            if(!controlPanelBtn.checked) controlPanelBtn.checked = true;
+        }
+        // if it is title make sure panel is closed
+        if (nextGuild.classList.contains('instruction-table-title')){
+            let controlPanelBtn = document.getElementById('panel-toggle');
+            if(controlPanelBtn.checked) controlPanelBtn.checked = false;
+        }
+        //if it is option make sure maze and algo are closed
+        if (nextGuild.classList.contains('instruction-options')){
+            let algoMenu = document.getElementById('algo-toggle');
+            if(algoMenu.checked) algoMenu.checked = false;
+            let mazeMenu = document.getElementById('maze-toggle');
+            if(mazeMenu.checked) mazeMenu.checked = false;
+        }
+    }
+});
+
+
+let allSkipBtns = document.querySelectorAll('.instruction .skip');
+allSkipBtns.forEach(btn=>{
+    btn.onclick = function(e){
+        //#1 make all instructions disappear
+        let allInstructions = document.querySelectorAll('.instruction');
+
+        allInstructions.forEach(massage=>{
+            if(!massage.classList.contains('hidden')){
+                massage.classList.add('hidden');
+            }
+        })
+
+        //#2 change instructionInProgress to false
+        instructionInProgress = false;
+    }
+})
+
+//when clicking on info button instruction starts again
+let infoBtn = document.querySelector('.title i.fa-info-circle');
+infoBtn.onclick = function(e){
+    if(instructionInProgress){
+        instructionInProgress = false;
+        // make all instructions disappear
+        let allInstructions = document.querySelectorAll('.instruction');
+
+        allInstructions.forEach(massage=>{
+            if(!massage.classList.contains('hidden')){
+                massage.classList.add('hidden');
+            }
+        })
+    }else{
+        instructionInProgress = true;
+        document.querySelector('.instruction-start').classList.remove('hidden');
+        //if pannel is open close it
+        document.getElementById('panel-toggle').checked=false;
+    }
+}
 
 //------------------------------------------------------
 //         Handling mouse functions (Start, end, wall, weight)
@@ -476,6 +548,11 @@ cleanBtns.forEach(btn=>{
         //#1 if toturial is open hide it
         if(!document.querySelector('.toturial').classList.contains('hidden')){
             document.querySelector('.toturial').classList.add('hidden');
+            let checkboxs = document.querySelectorAll(`.algo-title input[type='checkbox']`);
+        
+            checkboxs.forEach(checkbox => {
+                if(checkbox.checked)  checkbox.checked = false;
+            })
         }
         //#2 if universal grid all tables should be cleaned otherwise just this table
         if(universalGrid){
@@ -490,6 +567,11 @@ cleanBtns.forEach(btn=>{
         //#1 if toturial is open hide it
         if(!document.querySelector('.toturial').classList.contains('hidden')){
             document.querySelector('.toturial').classList.add('hidden');
+            let checkboxs = document.querySelectorAll(`.algo-title input[type='checkbox']`);
+        
+            checkboxs.forEach(checkbox => {
+                if(checkbox.checked)  checkbox.checked = false;
+            })
         }
 
         if(universalGrid){
@@ -585,6 +667,11 @@ visBtn.addEventListener('click',()=>{
         return
     }
 
+    if(instructionInProgress){
+        showMessage('Please finish the instructions first, or skip them.');
+        return;
+    }
+
     document.getElementById("panel-toggle").checked = false;
 
     document.getElementById('legend-btn').checked= false;
@@ -670,6 +757,16 @@ document.getElementById('panel-toggle').onclick = e =>{
             checkboxs.forEach(checkbox => {
                 if(checkbox.checked)  checkbox.checked = false;
             })
+        }
+
+        //if instruction is in progress make second step appear anf first disappear
+        if(instructionInProgress){
+            let firstMassage = document.querySelector('.instruction-start');
+            let secondMassage = document.querySelector('.instruction-algos');
+            if(!firstMassage.classList.contains('hidden')){
+                firstMassage.classList.add('hidden');
+                secondMassage.classList.remove('hidden');
+            }
         }
     }
 }

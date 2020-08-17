@@ -21,6 +21,16 @@ body .title{
     font-weight: 700;
     margin-top: 1rem;
 }
+body .title i{
+    font-size: 1.2rem;
+    color:rgb(71, 187, 255);
+    cursor: pointer;
+    position: relative;
+    bottom: 1rem;
+}
+body .title i:hover{
+    color:tomato;
+}
 body > #panel-label{
     width:3rem;
     height:3rem;
@@ -301,6 +311,143 @@ body> input:checked ~  .control-panel button{
     transition-delay: 0.5s;
     transition-property: left;
 }
+
+/*-------------------------------------------
+               Instructions
+--------------------------------------------*/
+.instruction{
+    z-index:100;
+    position:absolute;
+}
+.instruction.hidden{
+    display: none;
+}
+
+.instruction-start{
+    left:5rem;
+    top:1rem;
+}
+.instruction-algos{
+    left:25rem;
+    top:15%;
+}
+.instruction-options{
+    left:25rem;
+    top:30%;
+}
+.instruction-visBtn{
+    left:25rem;
+    top:73%;
+}
+.instruction-table-title{
+    left:8rem;
+    top:6rem;
+}
+.instruction-table-desc{
+    top:3.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.instruction-table-cleanbtn{
+    top:5.5rem;
+    right:5rem;
+}
+.instruction-table-time{
+    top:80%;
+    right:9rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.instruction-legend{
+    top:1.5rem;
+    right:6rem;
+}
+.instruction-end{
+    top:4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.instruction i{
+    font-size: 3rem;
+    color:tomato;
+    background: #fff;
+    border-radius: 50%;
+    padding: 0;
+    margin: 0;
+    border:none;
+    animation: icon-animation 0.5s infinite;
+}
+@keyframes icon-animation{
+    0%{
+        transform: translateX(10%);
+    }
+    50%{
+        transform: translateX(20%);
+    }
+    75%{
+        transform: translateX(10%);
+    }
+    100%{
+        transform: translateX(1%);
+    }
+}
+.instruction-table-desc i,.instruction-end i{
+    animation: down-arrow-animation 0.5s infinite;
+}
+@keyframes down-arrow-animation{
+    0%{
+        transform: translateY(10%);
+    }
+    50%{
+        transform: translateY(20%);
+    }
+    75%{
+        transform: translateY(10%);
+    }
+    100%{
+        transform: translateY(1%);
+    }
+}
+.instruction-table-cleanbtn i, .instruction-legend i, .instruction-table-time i{
+    float: right;
+}
+.instruction-table-cleanbtn  p, .instruction-legend p, .instruction-table-time p{
+    float: left;
+}
+
+
+.instruction p{
+    background:tomato;
+    font-size: 1.2rem;
+    padding: 1rem;
+    color: #fff;
+    border-radius: 10px;
+    z-index:100;
+    margin-top: 5px;
+    max-width: 40rem;
+    line-height: 1.5;
+    text-align: justify;
+}
+.instruction a{
+    color:#f4f4f4;
+    font-weight: 600;
+    margin:0.3rem;
+    transition:all 0.2s;
+}
+.instruction a:hover{
+    color:#fff;
+    font-weight: 660;
+}
+
+
+
 
 /*---------------------------------------
      Alert
@@ -677,11 +824,15 @@ body> input:checked ~  .control-panel button{
          border-radius: 0;
      }
 }
-
-@media (max-width: 880px){
+/*@media (max-width: 880px)*/
+@media (max-width: 1024px){
     .toturial{
         height:60%;
         width: 60%;
+    }
+    .instruction-visBtn{
+        left:25rem;
+        top:35rem;
     }
 }
 
@@ -693,7 +844,8 @@ body> input:checked ~  .control-panel button{
         font-size: 2.5rem;
     }
     .control-panel{
-        height: 55rem;
+       height: 55rem;
+       
     }
     .control-panel .control-item{
         border-radius: 3rem;
@@ -708,6 +860,14 @@ body> input:checked ~  .control-panel button{
     }
     .toturial .description, .toturial .back-face p{
         font-size: 1.3rem;
+    }
+    .instruction-options{
+        left:25rem;
+        top:22%;
+    }
+    .instruction-visBtn{
+        left:25rem;
+        top:38rem;
     }
 }
 
