@@ -417,7 +417,7 @@ body> input:checked ~  .control-panel button{
        Toturial Div
 ------------------------------------------*/
 .toturial{
-    height:60%;
+   height:60%;
     width: 40%;
     padding:0;
     position: absolute;
@@ -705,6 +705,9 @@ body> input:checked ~  .control-panel button{
     .toturial{
         height:60%;
         width: 50%;
+    }
+    .toturial .description, .toturial .back-face p{
+        font-size: 1.3rem;
     }
 }
 

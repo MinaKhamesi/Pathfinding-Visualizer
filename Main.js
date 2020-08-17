@@ -16,7 +16,6 @@ var universalGrid = false;
 
 
 
-
     const cells1 = document.querySelectorAll(`#table-1 .row span`);
     const cells2 = document.querySelectorAll(`#table-2 .row span`);
     const cells3 = document.querySelectorAll(`#table-3 .row span`);
@@ -474,6 +473,11 @@ const cleanBtns = document.querySelectorAll(`.table > i`);
 cleanBtns.forEach(btn=>{
 
     btn.onclick = (e)=>{
+        //#1 if toturial is open hide it
+        if(!document.querySelector('.toturial').classList.contains('hidden')){
+            document.querySelector('.toturial').classList.add('hidden');
+        }
+        //#2 if universal grid all tables should be cleaned otherwise just this table
         if(universalGrid){
             tables.forEach(table=>table.active && table.cleanGrid());
             return;
@@ -482,6 +486,12 @@ cleanBtns.forEach(btn=>{
     }
 
     btn.ondblclick = (e)=>{
+
+        //#1 if toturial is open hide it
+        if(!document.querySelector('.toturial').classList.contains('hidden')){
+            document.querySelector('.toturial').classList.add('hidden');
+        }
+
         if(universalGrid){
             tables.forEach(table=> table.active && table.resetBoard());
             return;
@@ -568,12 +578,20 @@ visBtn.addEventListener('click',()=>{
 
     const algos = document.querySelectorAll(`.control-item:nth-child(1) > ul input:checked, .control-item:nth-child(2) > ul input:checked`);
 
+    
+
     if(algos.length===0){
         showMessage('please select an algorithm to visualize.')
         return
     }
 
     document.getElementById("panel-toggle").checked = false;
+
+    document.getElementById('legend-btn').checked= false;
+
+    if(!document.querySelector(`.toturial`).classList.contains('hidden')){
+        document.querySelector(`.toturial`).classList.add('hidden')
+    }
 
     //inProgress = true;
 
@@ -618,6 +636,11 @@ const graphCheckboxs = document.querySelectorAll(`.table .algo-title input[type=
 const toturial = document.querySelector('.toturial');
 
 graphCheckboxs.forEach(checkbox=>checkbox.addEventListener('click',e=>{
+
+    // if control panel or legend are showing make them go away
+    document.getElementById('panel-toggle').checked= false;
+    document.getElementById('legend-btn').checked= false;
+
     
     if(e.target.checked){
         toturial.classList.remove('hidden');
@@ -634,6 +657,22 @@ graphCheckboxs.forEach(checkbox=>checkbox.addEventListener('click',e=>{
         populateToturialDiv('jjj')
     }
 }));
+
+//when opening the control-panel toturial should disapear
+document.getElementById('panel-toggle').onclick = e =>{
+    if(e.target.checked){
+        // if toturial is open hide it and make checkbox unchecked
+        if(!document.querySelector('.toturial').classList.contains('hidden')){
+            document.querySelector('.toturial').classList.add('hidden');
+            
+            let checkboxs = document.querySelectorAll(`.algo-title input[type='checkbox']`);
+        
+            checkboxs.forEach(checkbox => {
+                if(checkbox.checked)  checkbox.checked = false;
+            })
+        }
+    }
+}
 
 
 const populateToturialDiv = (algoName) =>{
@@ -670,7 +709,7 @@ const populateToturialDiv = (algoName) =>{
         desc.innerText = `The algorithm will start from start node. it evaluates all its neighbors base on a heuristic function, to see how far each node is from the goal, and then it will choose the node with least distance from the goal. Greedy BFS is not guaranteed to find a shortest path. However, it runs much quicker than Dijkstra because it uses the heuristic function to guide its way towards the goal very quickly.`;
 
         backFace.innerText = `
-        In this application the default heuristic function is based on 'Euclidean distance' of each node from the goal. However you can select 'Manhattan distance' from options to see how the behavior of gbfs and A* will slightly change. Every heuristic function will work as long as it is consistent and it does not over estimate the distance.
+        In this application the default heuristic function is based on 'Euclidean distance' of each node from the goal. However you can select 'Manhattan distance' from options to see how the behavior of gbfs and A* will slightly change. Every heuristic function will work as long as it is consistent and it does not overestimate the distance.
         Since the algorithm is greedy and choose the best move at the moment, you can see how it will get stuck in obstacles.`;
 
         return;
@@ -701,14 +740,15 @@ const populateToturialDiv = (algoName) =>{
         case "Recursive Backtracker":
             title.innerText = "Recursive Backtracker";
             desc.innerText = `This algorithm is a randomized version of the depth-first search algorithm. It chooses a cell, selects one of its unseen neighbors and destroys the wall between them. It keeps doing this process until it reaches a cell with no unseen neighbor. At this point It backtracks until it sees a new cell or the maze is done.`;
-            backFace.innerText = `For implementing resursive backtracker maze generation algorithm, in this application, evry other node was considered walls of its neighbors. Therfore the neighbors of each cell is actually two cells away from the current cell, and the rest of the algorithm is the same as described before.`
+            backFace.innerText = `For implementing resursive backtracker maze generation algorithm, in this application, every other node was considered walls of its neighbors. Therefore the neighbors of each cell is actually two cells away from the current cell, and the rest of the algorithm is the same as described before.`
         return;
 
 
         case "Recursive Division":
             title.innerText = "Recursive Division";
             desc.innerText = `This algorithm makes horizontal or vertical walls at every step(based on the width and height of current area), and make a passage in this wall. The algorithm will call itself on two areas created by the wall. The process will continue until reaching minimum area eligible. At this point function will return and maze is done.`;
-            backFace.innerHTML = `You can see my github repo to see the code
+            backFace.innerHTML = `<br/>
+            You can see my github repo to see the code
              <a href='http://github.com/mina801' target='_blank'>Check out my github</a>`
         return;
 
@@ -716,7 +756,7 @@ const populateToturialDiv = (algoName) =>{
         case "Randomized Prim":
             title.innerText = "Randomized Prim's algorithm";
             desc.innerText = `This algorithm is a randomized version of Prim's algorithm.Algorithm starts with a grid full of walls. It picks a cell, marks it as part of the maze. Add the walls of the cell to the wall list.And while there are walls in the wall list, it picks a random wall from the list. Pops it and if only one of the two cells that the wall divides is visited, then it makes the wall a passage and marks the unvisited cell as part of the maze. And adds the neighboring walls to the wall list.`;
-            backFace.innerHTML = `To implement this algorithm in a grid of rows and columns, like in recursive backtracker algorithm, every other node is treated like a wall and neighbors are actually two cells away from each other.
+            backFace.innerHTML = `To implement this algorithm in a grid of rows and columns, like in recursive backtracker algorithm, every other node is treated like a wall and neighbors are actually two cells away from each other(because the cell between them is being a wall).
              I actually kept track of frontiers, the cells that at least one of their neighbors has been visited and is part of the maze. And every time one of them is selected from the frontier list, the algorithm makes the frontier and also the wall between frontier and its visited neighbor(aka, the cells that behave like a wall in this implementation) a passage. The process will continue as long as there are frontiers left.`;
         return;
 
@@ -724,7 +764,8 @@ const populateToturialDiv = (algoName) =>{
         case "spiral":
             title.innerText = "Spiral algorithm";
             desc.innerText = `This is a very simple 2-D matrix traversal algorithm. While the width or height is not less than a threshold, the algorithm will visit the first row, last column, last row and first column in this order and after each iteration these variables will increment and decrement to make traversal possible.`;
-            backFace.innerHTML = `You can see my github repo to see the code
+            backFace.innerHTML = `<br/>
+            You can see my github repo to see the code
              <a href='http://github.com/mina801' target='_blank'>Check out my github</a>`
         return;
 
@@ -732,7 +773,10 @@ const populateToturialDiv = (algoName) =>{
         case "diagonal steps":
             title.innerText = "diagonal steps algorithm";
             desc.innerText = `This is a very simple 2D matrix traversal. It is exactly written as you see it in the visualization. The algorithm has a "going-up" variable that while true it will go up diagonally,that is decrementing row while incrementing column number until we either reach first row or last culumn and then we go down until reaching either first column or last row.`;
-            backFace.innerHTML = `You can see my github repo to see the code
+            backFace.innerHTML = `
+            
+            
+            You can see my github repo to see the code
              <a href='http://github.com/mina801' target='_blank'>Check out my github</a>`
         return;
 
