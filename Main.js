@@ -32,6 +32,10 @@ allInstructionsNext.forEach(nextBtn=>{
             let mazeMenu = document.getElementById('maze-toggle');
             if(mazeMenu.checked) mazeMenu.checked = false;
         }
+        //if it is end make info icon noticeable
+        if (nextGuild.classList.contains('instruction-end')){
+            document.querySelector('.title  .fa-info-circle').classList.add('noticeable');
+        }
     }
 });
 
@@ -50,6 +54,11 @@ allSkipBtns.forEach(btn=>{
 
         //#2 change instructionInProgress to false
         instructionInProgress = false;
+
+        //#3 if info icon is noticeable make it normal
+        if(document.querySelector('.title .fa-info-circle').classList.contains('noticeable')){
+            document.querySelector('.title .fa-info-circle').classList.remove('noticeable')
+        }
     }
 })
 
@@ -723,6 +732,11 @@ const graphCheckboxs = document.querySelectorAll(`.table .algo-title input[type=
 const toturial = document.querySelector('.toturial');
 
 graphCheckboxs.forEach(checkbox=>checkbox.addEventListener('click',e=>{
+    //if instructions is in progress do'nt show
+    if(instructionInProgress){
+        showMessage('Please finish the instructions first, or skip them.');
+        return;
+    }
 
     // if control panel or legend are showing make them go away
     document.getElementById('panel-toggle').checked= false;

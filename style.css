@@ -27,7 +27,20 @@ body .title i{
     cursor: pointer;
     position: relative;
     bottom: 1rem;
+    border-radius: 50%;
 }
+body .title i.noticeable{
+    color:tomato;
+    transform:scale(1.2);
+    box-shadow:2px 2px 3px #fff;
+    animation: noticeable 0.7s infinite;
+}
+@keyframes noticeable{
+    50%{
+        transform: scale(1.4) translateY(-15%);
+    }
+}
+
 body .title i:hover{
     color:tomato;
 }
