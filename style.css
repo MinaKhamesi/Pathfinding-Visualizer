@@ -358,10 +358,10 @@ body> input:checked ~  .control-panel button{
 }
 .instruction-table-desc{
     top:3.5rem;
-    display: flex;
+    /*display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: center;*/
 }
 .instruction-table-cleanbtn{
     top:5.5rem;
@@ -845,7 +845,11 @@ body> input:checked ~  .control-panel button{
     }
     .instruction-visBtn{
         left:25rem;
-        top:35rem;
+        top:36rem;
+    }
+    .instruction-options{
+        left:25rem;
+        top:22%;
     }
 }
 

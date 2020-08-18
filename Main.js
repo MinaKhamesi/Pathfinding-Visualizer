@@ -3,8 +3,10 @@ import Table from './TableClass.js';
 //---------------------------------------------------------
 //          Instruction GuildLines
 //---------------------------------------------------------
-var instructionInProgress = true;
-document.querySelector('.instruction-start').classList.remove('hidden');
+var instructionInProgress
+setTimeout(()=>{
+    instructionInProgress = true;
+document.querySelector('.instruction-start').classList.remove('hidden');},700);
 
 // making first guild disappear is taking care of by clicking on menu.I wrote it on toturial section.
 
@@ -75,6 +77,11 @@ infoBtn.onclick = function(e){
                 massage.classList.add('hidden');
             }
         })
+        //if info icon is noticeable make it normal
+        if(document.querySelector('.title i.fa-info-circle').classList.contains('noticeable')){
+            document.querySelector('.title i.fa-info-circle').classList.remove('noticeable')
+        }
+
     }else{
         instructionInProgress = true;
         document.querySelector('.instruction-start').classList.remove('hidden');
@@ -785,6 +792,21 @@ document.getElementById('panel-toggle').onclick = e =>{
     }
 }
 
+//when clicking on the toturial, it disappears
+toturial.addEventListener('click',(e)=>{
+    if(!toturial.classList.contains('hidden')){
+        toturial.classList.add('hidden')
+    }
+    //make all checkboxs unchecked:
+    let checkboxs = document.querySelectorAll(`.algo-title input[type='checkbox']`);
+        
+            checkboxs.forEach(checkbox => {
+                if(checkbox.checked)  checkbox.checked = false;
+            })
+})
+
+
+
 
 const populateToturialDiv = (algoName) =>{
     const title = document.querySelector(' .toturial .title');
@@ -842,7 +864,7 @@ const populateToturialDiv = (algoName) =>{
             desc.innerText = `BFS explores nodes level by level. That is, after visiting start node, it will visit all neighbors(or children in a tree traversal) of start node before going to next level and it will keep doing this process until it reaches the end node.`;
 
             backFace.innerText = `BFS is not a weighted algorithm. That is, it will treat all nodes the same regardless of them having different costs. But it will find a shortest path(only based on the number of nodes visited).
-            BFS was implemented by a "queue".In grids without any weighted node,Breadth-first search  will behave exactly like dijkstra . You can see that by visualizing both algorithms at same time with a same grid without weighted cells.
+            BFS was implemented by a "queue".In grids without any weighted node,Breadth-first search  will behave almost exactly like dijkstra . You can see that by visualizing both algorithms at same time with a same grid without weighted cells.
             You can create exact same grids with 'Universal Grid' option. `;
 
         return;
