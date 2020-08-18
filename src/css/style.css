@@ -14,6 +14,7 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: start;
+    overflow-x: hidden;
 }
 body .title{
     font-family: 'Dancing Script', cursive;
@@ -463,6 +464,15 @@ body> input:checked ~  .control-panel button{
 
 
 
+
+
+
+
+
+
+
+
+
 /*---------------------------------------
      Alert
 -----------------------------------------*/
@@ -489,13 +499,28 @@ body> input:checked ~  .control-panel button{
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*---------------------------------------
 ---     LEGEND
 -----------------------------------------*/
 .legend{
     position:absolute;
-    top:-30rem;
-    left:70rem;
+    /*top:-30rem;
+    left:70rem;*/
+    top:-50rem;
+    left:90rem;
     background:linear-gradient(120deg, rgba(91, 94, 67, 0.6) 0%, rgba(183, 190, 158, 0.8) 100%);
     color:#fff;
     opacity:0.99;
@@ -654,6 +679,18 @@ body> input:checked ~  .control-panel button{
     line-height: 1.5;
     overflow: hidden;
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -870,6 +907,9 @@ body> input:checked ~  .control-panel button{
     .control-panel .control-item{
         border-radius: 3rem;
         font-size: 2.5rem;
+    }
+    .container{
+        height:80%;
     }
     .container.multiple{
         grid-template-columns: 1fr;
