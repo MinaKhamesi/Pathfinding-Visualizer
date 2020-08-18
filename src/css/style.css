@@ -520,7 +520,7 @@ body> input:checked ~  .control-panel button{
     /*top:-30rem;
     left:70rem;*/
     top:-50rem;
-    left:90rem;
+    right:-20rem;
     background:linear-gradient(120deg, rgba(91, 94, 67, 0.6) 0%, rgba(183, 190, 158, 0.8) 100%);
     color:#fff;
     opacity:0.99;
@@ -598,6 +598,13 @@ body> input:checked ~  .control-panel button{
 .legend .shortest-path{
     background-color: rgb(238, 251, 57);
 }
+
+
+
+
+
+
+
 
 
 /*----------------------------------------
