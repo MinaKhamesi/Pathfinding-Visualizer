@@ -779,6 +779,10 @@ body> input:checked ~  .control-panel button{
     background-color: rgb(78, 76, 76);
     border:1px rgb(78, 76, 76) solid;
 }
+.table .row .wall{
+    background-color: rgb(78, 76, 76);
+    border:1px rgb(78, 76, 76) solid;
+}
 .weight{
     background:rgb(182, 129, 4);
 }
