@@ -495,7 +495,7 @@ body> input:checked ~  .control-panel button{
 .legend{
     position:absolute;
     top:-30rem;
-    right:-30rem;
+    left:70rem;
     background:linear-gradient(120deg, rgba(91, 94, 67, 0.6) 0%, rgba(183, 190, 158, 0.8) 100%);
     color:#fff;
     opacity:0.99;
@@ -555,7 +555,7 @@ body> input:checked ~  .control-panel button{
 .legend .unvisited{
     background-color: #fff;
 }
-/*.legend .wall{
+.legend .wall{
     background-color: rgb(58, 54, 54);
 }
 .legend .weight{
@@ -572,7 +572,8 @@ body> input:checked ~  .control-panel button{
 }
 .legend .shortest-path{
     background-color: rgb(238, 251, 57);
-}*/
+}
+
 
 /*----------------------------------------
        Toturial Div
@@ -769,25 +770,22 @@ body> input:checked ~  .control-panel button{
     top:0.35rem;
 }
 
-.start{
+.table .row span.start{
     background:rgb(18, 248, 10);
 }
-.end{
+.table .row span.end{
     background-color: rgb(206, 11, 11);
 }
-.wall{
-    background-color: rgb(78, 76, 76);
-    border:1px rgb(78, 76, 76) solid;
-}
+
 .table .row .wall{
     background-color: rgb(78, 76, 76);
     border:1px rgb(78, 76, 76) solid;
 }
-.weight{
+.table .row span.weight{
     background:rgb(182, 129, 4);
 }
 
-.visited{
+.table .row span.visited{
     background-color: rgb(168, 221, 44);
     border-color: rgb(208, 238, 139);
     animation: cell-animation 0.4s;
@@ -799,7 +797,7 @@ body> input:checked ~  .control-panel button{
 .shortest-path.weight{
     background-color: rgb(253, 208, 61);
 }
-.shortest-path{
+.table .row span.shortest-path{
     background-color: rgb(238, 251, 57);
     /*border-color:rgb(198, 206, 86) ;*/
     animation:cell-animation 0.4s;
@@ -860,7 +858,7 @@ body> input:checked ~  .control-panel button{
 
 @media (max-width: 700px){
     :root{
-        font-size: 9px;
+        font-size: 10px;
     }
     body .title{
         font-size: 2.5rem;
