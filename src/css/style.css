@@ -777,7 +777,7 @@ body> input:checked ~  .control-panel button{
 }
 .wall{
     background-color: rgb(78, 76, 76);
-    border-color: rgb(78, 76, 76);
+    border:1px rgb(78, 76, 76) solid;
 }
 .weight{
     background:rgb(182, 129, 4);
