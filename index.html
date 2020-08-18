@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <link rel="stylesheet" href="style.css">
-    <!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script> -->
+    <!--<link rel="stylesheet" href="style.css">
+    
     
     <script src="./Main.js" type="module" defer></script>
     <script src="./TableClass.js" type='module'defer></script>
-    <script src="./GraphAlgos.js" type='module' defer></script>
+    <script src="./GraphAlgos.js" type='module' defer></script>-->
+    
     <title>PathFinding Visualizer</title>
 </head>
 <body>
@@ -225,8 +226,21 @@
                 <div class='visited'></div><p>Visited Node</p>
             </li>
             <li>
+                <div class='visited weight'></div><p>Visited-weight Node</p>
+            </li>
+            <li>
+                <div style='background-color: aqua;'></div><p>Current Node</p>
+            </li>
+            <li>
+                <div style='background-color: tomato;'></div><p>Current Node</p>
+            </li>
+            <li>
                 <div class='shortest-path'></div><p>Shortest-Path Node</p>
             </li>
+            <li>
+                <div class='shortest-path weight'></div><p>Shortest-Path-Weight Node</p>
+            </li>
+            
         </ul>
     </div>
 
@@ -7750,7 +7764,7 @@
     </div>
         
     </div>
-
+    <script src='./dist/bundle.js'></script>
 </body>
 
 </html>

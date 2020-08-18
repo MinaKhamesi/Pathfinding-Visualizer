@@ -1,3 +1,4 @@
+import css from '../css/style.css';
 import Table from './TableClass.js';
 
 //---------------------------------------------------------
@@ -802,7 +803,7 @@ toturial.addEventListener('click',(e)=>{
         
             checkboxs.forEach(checkbox => {
                 if(checkbox.checked)  checkbox.checked = false;
-            })
+            });
 })
 
 

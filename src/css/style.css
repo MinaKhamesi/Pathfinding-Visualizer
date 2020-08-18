@@ -67,7 +67,7 @@ body > #panel-label:hover{
 }
 body >#panel-toggle:checked + label{
     left:20rem;
-    top:2rem;
+    top:1.1rem;
     transform:rotate(45deg);
     box-shadow: 1px 1px 2px #000, -1px -1px 2px #fff;
     width:2rem;
@@ -78,7 +78,7 @@ body >#panel-toggle:checked + label{
 }
 body >#panel-toggle:checked + label:hover{
     left:20.05rem;
-    top:2.05rem;
+    top:1.2rem;
 }
 body > input{
     visibility: hidden;
@@ -89,9 +89,10 @@ body > input{
     padding: 1rem;
     padding-top: 2rem;
     left:-25rem;
-    top:2rem;
+    top:1rem;
     width:20rem;
-    height:48rem;
+    /*height:48rem;*/
+    height:97%;
     background:linear-gradient(60deg, rgba(91, 94, 67, 0.6) 0%, rgba(240, 245, 222, 0.119) 100%);
     box-shadow: 1px 1px 10px #888;
     border-radius:10px;
@@ -554,7 +555,7 @@ body> input:checked ~  .control-panel button{
 .legend .unvisited{
     background-color: #fff;
 }
-.legend .wall{
+/*.legend .wall{
     background-color: rgb(58, 54, 54);
 }
 .legend .weight{
@@ -571,7 +572,7 @@ body> input:checked ~  .control-panel button{
 }
 .legend .shortest-path{
     background-color: rgb(238, 251, 57);
-}
+}*/
 
 /*----------------------------------------
        Toturial Div
@@ -768,33 +769,33 @@ body> input:checked ~  .control-panel button{
     top:0.35rem;
 }
 
-.table .row .start{
+.start{
     background:rgb(18, 248, 10);
 }
-.table .row .end{
+.end{
     background-color: rgb(206, 11, 11);
 }
-.table .row .wall{
+.wall{
     background-color: rgb(78, 76, 76);
     border-color: rgb(78, 76, 76);
 }
-.table .row .weight{
+.weight{
     background:rgb(182, 129, 4);
 }
 
-.table .row .visited{
+.visited{
     background-color: rgb(168, 221, 44);
     border-color: rgb(208, 238, 139);
     animation: cell-animation 0.4s;
     animation: visited-animation 0.4s;
 }
-.table .row .visited.weight{
+.visited.weight{
     background-color: rgba(110, 139, 4, 0.8);
 }
-.table .row .shortest-path.weight{
+.shortest-path.weight{
     background-color: rgb(253, 208, 61);
 }
-.table .row .shortest-path{
+.shortest-path{
     background-color: rgb(238, 251, 57);
     /*border-color:rgb(198, 206, 86) ;*/
     animation:cell-animation 0.4s;
