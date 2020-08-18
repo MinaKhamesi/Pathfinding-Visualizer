@@ -922,8 +922,8 @@ body> input:checked ~  .control-panel button{
         grid-template-columns: 1fr;
     }
     .toturial{
-        height:60%;
-        width: 50%;
+        height:70%;
+        width: 70%;
     }
     .toturial .description, .toturial .back-face p{
         font-size: 1.3rem;

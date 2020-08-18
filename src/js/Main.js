@@ -793,8 +793,9 @@ document.getElementById('panel-toggle').onclick = e =>{
     }
 }
 
+
 //when clicking on the toturial, it disappears
-toturial.addEventListener('click',(e)=>{
+/*toturial.addEventListener('click',(e)=>{
     if(!toturial.classList.contains('hidden')){
         toturial.classList.add('hidden')
     }
@@ -804,7 +805,7 @@ toturial.addEventListener('click',(e)=>{
             checkboxs.forEach(checkbox => {
                 if(checkbox.checked)  checkbox.checked = false;
             });
-})
+})*/
 
 
 
