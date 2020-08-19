@@ -884,7 +884,7 @@ const populateToturialDiv = (algoName) =>{
             desc.innerText = `This algorithm makes horizontal or vertical walls at every step(based on the width and height of current area), and make a passage in this wall. The algorithm will call itself on two areas created by the wall. The process will continue until reaching minimum area eligible. At this point function will return and maze is done.`;
             backFace.innerHTML = `<br/>
             You can see my github repo to see the code
-             <a href='http://github.com/mina801' target='_blank'>Check out my github</a>`
+             <a href='http://github.com/MinaKhamesi' target='_blank'>Check out my github</a>`
         return;
 
 
@@ -901,7 +901,7 @@ const populateToturialDiv = (algoName) =>{
             desc.innerText = `This is a very simple 2-D matrix traversal algorithm. While the width or height is not less than a threshold, the algorithm will visit the first row, last column, last row and first column in this order and after each iteration these variables will increment and decrement to make traversal possible.`;
             backFace.innerHTML = `<br/>
             You can see my github repo to see the code
-             <a href='http://github.com/mina801' target='_blank'>Check out my github</a>`
+             <a href='http://github.com/MinaKhamesi' target='_blank'>Check out my github</a>`
         return;
 
 
@@ -912,7 +912,7 @@ const populateToturialDiv = (algoName) =>{
             
             
             You can see my github repo to see the code
-             <a href='http://github.com/mina801' target='_blank'>Check out my github</a>`
+             <a href='http://github.com/MinaKhamesi' target='_blank'>Check out my github</a>`
         return;
 
 
