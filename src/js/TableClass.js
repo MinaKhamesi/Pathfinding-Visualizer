@@ -96,18 +96,38 @@ export default class Table{
         let start;
         let end;
         const gridEle = document.querySelector(`#${this.id} .grid`);
+
+        let firstHiddenRowsCount = 0;
+        let hiddenRowsExist = false;
         
         for(let i=0; i<gridEle.children.length; i++){
-            if(gridEle.children[i].style.display==='none') continue;
-
-            const row = gridEle.children[i].children;
             
+            if(window.getComputedStyle(gridEle.children[i]).display === "none"){
+                hiddenRowsExist =true;
+                continue;
+            } 
+            if ( hiddenRowsExist && firstHiddenRowsCount===0) firstHiddenRowsCount = i;
+            const row = gridEle.children[i].children;
             const currentRow = []
+
+            let firstHiddenColsCount = 0;
+            let hiddenColsExist = false;
+
             for(let j=0; j<row.length; j++){
-                if(row[j].style.display==='none') continue;
+                if(window.getComputedStyle(row[j]).display === "none"){
+                    hiddenColsExist = true;
+                    continue;
+                } 
+
+                if (hiddenColsExist && firstHiddenColsCount===0) firstHiddenColsCount = j;
+
                 currentRow.push(row[j]);
-                if (row[j].classList.contains('start')) start=[i,j];
-                if (row[j].classList.contains('end'))    end=[i,j];
+                if (row[j].classList.contains('start')){
+                    start=[i-firstHiddenRowsCount,j-firstHiddenColsCount];
+                } 
+                if (row[j].classList.contains('end')) {
+                    end=[i-firstHiddenRowsCount,j-firstHiddenColsCount];
+                }   
             }
             grid.push(currentRow);
         }

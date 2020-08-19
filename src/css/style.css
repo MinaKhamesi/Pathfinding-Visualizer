@@ -921,13 +921,13 @@ body> input:checked ~  .control-panel button{
     .container.multiple{
         grid-template-columns: 1fr;
     }
-    .table .row:nth-child(-n+10){
+    .table .row:nth-child(-n+7){
         display: none;
             }
     .table .row span:nth-child(-n+15){
         display: none;
     }
-    .table .row:nth-child(n+20){
+    .table .row:nth-child(n+25){
         display: none;
      }
     .table .row span:nth-child(n+45){
