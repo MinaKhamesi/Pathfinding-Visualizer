@@ -98,9 +98,13 @@ export default class Table{
         const gridEle = document.querySelector(`#${this.id} .grid`);
         
         for(let i=0; i<gridEle.children.length; i++){
+            if(gridEle.children[i].style.display==='none') continue;
+
             const row = gridEle.children[i].children;
+            
             const currentRow = []
             for(let j=0; j<row.length; j++){
+                if(row[j].style.display==='none') continue;
                 currentRow.push(row[j]);
                 if (row[j].classList.contains('start')) start=[i,j];
                 if (row[j].classList.contains('end'))    end=[i,j];
