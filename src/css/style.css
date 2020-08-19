@@ -921,6 +921,18 @@ body> input:checked ~  .control-panel button{
     .container.multiple{
         grid-template-columns: 1fr;
     }
+    .table .row:nth-child(-n+10){
+        display: none;
+            }
+    .table .row span:nth-child(-n+19){
+        display: none;
+    }
+    .table .row:nth-child(n+20){
+        display: none;
+     }
+    .table .row span:nth-child(n+42){
+        display: none;  
+    }
     .toturial{
         height:70%;
         width: 70%;
