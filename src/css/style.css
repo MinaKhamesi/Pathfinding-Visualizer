@@ -486,7 +486,7 @@ body> input:checked ~  .control-panel button{
     right:5rem;
     top:-5rem;
     border-radius: 5px;
-    z-index:5;
+    z-index:11;
     transition: top 0.3s ease-in-out;
 }
 .alert.active{
@@ -598,8 +598,12 @@ body> input:checked ~  .control-panel button{
 .legend .shortest-path{
     background-color: rgb(238, 251, 57);
 }
-
-
+.legend .visited.weight{
+    background-color: rgba(110, 139, 4, 0.8);
+}
+.legend .shortest-path.weight{
+    background-color: rgb(253, 208, 61);
+}
 
 
 
@@ -835,10 +839,10 @@ body> input:checked ~  .control-panel button{
     animation: cell-animation 0.4s;
     animation: visited-animation 0.4s;
 }
-.visited.weight{
+.table .row .visited.weight{
     background-color: rgba(110, 139, 4, 0.8);
 }
-.shortest-path.weight{
+.table .row .shortest-path.weight{
     background-color: rgb(253, 208, 61);
 }
 .table .row span.shortest-path{
@@ -933,6 +937,11 @@ body> input:checked ~  .control-panel button{
     .table .row span:nth-child(n+45){
         display: none;  
     }
+    .table i{
+        padding: 0.8rem;
+        font-size: 1.1rem;
+    }
+
     .toturial{
         height:70%;
         width: 70%;
