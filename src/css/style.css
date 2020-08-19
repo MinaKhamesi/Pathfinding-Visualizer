@@ -924,13 +924,13 @@ body> input:checked ~  .control-panel button{
     .table .row:nth-child(-n+10){
         display: none;
             }
-    .table .row span:nth-child(-n+19){
+    .table .row span:nth-child(-n+15){
         display: none;
     }
     .table .row:nth-child(n+20){
         display: none;
      }
-    .table .row span:nth-child(n+42){
+    .table .row span:nth-child(n+45){
         display: none;  
     }
     .toturial{
