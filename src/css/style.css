@@ -658,10 +658,16 @@ body> input:checked ~  .control-panel button{
     transform:perspective(1000px) rotateY(0);
 }
 
-.toturial:hover .back-face{
+/*.toturial:hover .back-face{
     transform:perspective(1000px) rotateY(0);
 }
 .toturial:hover .front-face{
+    transform:perspective(1000px) rotateY(180deg);
+}*/
+#toturial-face-toggle:checked + label  .back-face{
+    transform:perspective(1000px) rotateY(0);
+}
+#toturial-face-toggle:checked + label .front-face{
     transform:perspective(1000px) rotateY(180deg);
 }
 

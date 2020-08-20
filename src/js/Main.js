@@ -795,16 +795,23 @@ document.getElementById('panel-toggle').onclick = e =>{
 
 
 //flip the toturial card on swip 
+/*
 toturial.addEventListener('touchstart',(e)=>{
     if(e.target.classList.contains('github-link')) return;
     e.preventDefault();
     //console.log(e.type);
 })
+
+
+
 toturial.addEventListener('touchmove',(e)=>{
     if(e.target.classList.contains('github-link')) return;
     e.preventDefault();
     //console.log(e.type);
 })
+
+
+
 toturial.addEventListener('touchend',e=>{
     if(e.target.classList.contains('github-link')) return;
     e.preventDefault();
@@ -824,7 +831,7 @@ toturial.addEventListener('touchend',e=>{
     let frontFace;
     let backFace;
     let weAreAtFront;
-    
+
     if(currentFace.classList.contains('front-face')){
         frontFace = currentFace;
         backFace = otherFace;
@@ -845,7 +852,7 @@ toturial.addEventListener('touchend',e=>{
         frontFace.style.transform = 'rotateY(0deg)';
     }
     
-})
+})*/
 
 
 
