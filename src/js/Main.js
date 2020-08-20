@@ -794,18 +794,45 @@ document.getElementById('panel-toggle').onclick = e =>{
 }
 
 
-//when clicking on the toturial, it disappears
-/*toturial.addEventListener('click',(e)=>{
-    if(!toturial.classList.contains('hidden')){
-        toturial.classList.add('hidden')
+//flip the toturial card on swip 
+toturial.addEventListener('touchstart',(e)=>{
+    if(e.target.classList.contains('github-link')) return;
+    e.preventDefault();
+    console.log(e.type);
+})
+toturial.addEventListener('touchmove',e=>{
+    if(e.target.classList.contains('github-link')) return;
+    
+    let currentFace = e.target.parentElement;
+    if(currentFace.classList.contains('toturial')){
+        currentFace = currentFace.children[1];
     }
-    //make all checkboxs unchecked:
-    let checkboxs = document.querySelectorAll(`.algo-title input[type='checkbox']`);
-        
-            checkboxs.forEach(checkbox => {
-                if(checkbox.checked)  checkbox.checked = false;
-            });
-})*/
+    const otherFace = (currentFace.previousElementSibling)? currentFace.previousElementSibling : currentFace.nextElementSibling;
+
+    let frontFace;
+    let backFace;
+    let weAreAtFront;
+    if(currentFace.classList.contains('front-face')){
+        frontFace = currentFace;
+        backFace = otherFace;
+        weAreAtFront = true;
+    }else{
+        backFace = currentFace;
+        frontFace = otherFace;
+        weAreAtFront = false;
+    }
+    //console.log(frontFace);
+    if(weAreAtFront){
+        //if we are at front we wanna flip the card like hover
+        backFace.style.transform = ' rotateY(0deg)';
+        frontFace.style.transform = ' rotateY(180deg)';
+    }else{
+        //if we are at back, we wanna get back to normal
+        backFace.style.transform = 'rotateY(-180deg)';
+        frontFace.style.transform = 'rotateY(0deg)';
+    }
+    
+})
 
 
 
@@ -884,7 +911,7 @@ const populateToturialDiv = (algoName) =>{
             desc.innerText = `This algorithm makes horizontal or vertical walls at every step(based on the width and height of current area), and make a passage in this wall. The algorithm will call itself on two areas created by the wall. The process will continue until reaching minimum area eligible. At this point function will return and maze is done.`;
             backFace.innerHTML = `<br/>
             You can see my github repo to see the code
-             <a href='http://github.com/MinaKhamesi' target='_blank'>Check out my github</a>`
+             <a href='http://github.com/MinaKhamesi' target='_blank' class='github-link'>Check out my github</a>`
         return;
 
 
@@ -901,18 +928,16 @@ const populateToturialDiv = (algoName) =>{
             desc.innerText = `This is a very simple 2-D matrix traversal algorithm. While the width or height is not less than a threshold, the algorithm will visit the first row, last column, last row and first column in this order and after each iteration these variables will increment and decrement to make traversal possible.`;
             backFace.innerHTML = `<br/>
             You can see my github repo to see the code
-             <a href='http://github.com/MinaKhamesi' target='_blank'>Check out my github</a>`
+             <a href='http://github.com/MinaKhamesi' target='_blank' class='github-link'>Check out my github</a>`
         return;
 
 
         case "diagonal steps":
             title.innerText = "diagonal steps algorithm";
             desc.innerText = `This is a very simple 2D matrix traversal. It is exactly written as you see it in the visualization. The algorithm has a "going-up" variable that while true it will go up diagonally,that is decrementing row while incrementing column number until we either reach first row or last culumn and then we go down until reaching either first column or last row.`;
-            backFace.innerHTML = `
-            
-            
+            backFace.innerHTML = `<br/>
             You can see my github repo to see the code
-             <a href='http://github.com/MinaKhamesi' target='_blank'>Check out my github</a>`
+             <a href='http://github.com/MinaKhamesi' target='_blank' class='github-link'>Check out my github</a>`
         return;
 
 
