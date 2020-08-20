@@ -798,20 +798,33 @@ document.getElementById('panel-toggle').onclick = e =>{
 toturial.addEventListener('touchstart',(e)=>{
     if(e.target.classList.contains('github-link')) return;
     e.preventDefault();
-    console.log(e.type);
+    //console.log(e.type);
 })
-toturial.addEventListener('touchmove',e=>{
+toturial.addEventListener('touchmove',(e)=>{
     if(e.target.classList.contains('github-link')) return;
-    
-    let currentFace = e.target.parentElement;
+    e.preventDefault();
+    //console.log(e.type);
+})
+toturial.addEventListener('touchend',e=>{
+    if(e.target.classList.contains('github-link')) return;
+    e.preventDefault();
+    //console.log(e.target);
+    let currentFace; 
+    if(e.target.classList.contains('front-face')||e.target.classList.contains('back-face')){
+        currentFace = e.target;
+    }else{
+        currentFace = e.target.parentElement;
+    }
     if(currentFace.classList.contains('toturial')){
         currentFace = currentFace.children[1];
     }
+
     const otherFace = (currentFace.previousElementSibling)? currentFace.previousElementSibling : currentFace.nextElementSibling;
 
     let frontFace;
     let backFace;
     let weAreAtFront;
+    
     if(currentFace.classList.contains('front-face')){
         frontFace = currentFace;
         backFace = otherFace;
