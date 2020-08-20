@@ -230,6 +230,192 @@ var universalGrid = false;
     }));
 
 
+
+    const synchronizeTables = (currentEle,func=null)=>{
+        //find table index==table-id -1 and ele index in table that is row*totalcols + col 
+        const currentTableId = currentEle.parentElement.parentElement.parentElement.id;
+        let idx;
+        if (currentTableId=='table-1') idx = 0;
+        if (currentTableId=='table-2') idx = 1;
+        if (currentTableId=='table-3') idx = 2;
+        if (currentTableId=='table-4') idx = 3;
+    
+        //find index in allcells
+        let index;
+        for(let i=0;i<allCells[idx].length;i++){
+            if(allCells[idx][i]===currentEle){
+                index = i;
+                
+            }
+        }
+    
+        for(let table=0;table<allCells.length;table++){
+            if(table==idx) continue;
+            for(let ele=0;ele<allCells[table].length;ele++){
+                if(ele===index){
+                    if(func=='remove'){
+                        allCells[table][ele].classList.remove(mouseValue);
+                    }
+                    if(func=='add'){
+                        allCells[table][ele].classList.add(mouseValue);
+                    }
+                    if(func=='add-solid'){
+                        allCells[table][ele].className = mouseValue;
+                    }
+                    if(func=='add-like'){
+                        allCells[table][ele].className = mouseValue;
+                        
+                        setTimeout(()=>{
+                            allCells[table][ele].className = '';
+                            },30)
+                    }
+                }
+            }
+        }
+    };
+    
+    
+    const handleStartTouch = e=>{
+        const currentEle = e.path[0];
+        if(!currentEle || !currentEle.parentElement || !currentEle.parentElement.classList.contains('row')) return;
+    
+        if(mouseValue==='start'||mouseValue=='end'){
+            mouseValue = (weightIsSelected) ? 'weight' : 'wall';
+        }
+    
+        e.preventDefault();
+        mouseIsPressed = true;
+        //const currentEle = e.path[0];
+        //console.log(currentEle);
+        if(currentEle.classList.contains('start')){
+            mouseValue = 'start';
+        }else if(currentEle.classList.contains('end')){
+            mouseValue = 'end';
+        }else{
+                if(currentEle.classList.contains(mouseValue)){
+                    currentEle.classList.remove(mouseValue);
+                    if(universalGrid){
+                        synchronizeTables(currentEle,'remove');
+                    }
+                    
+                }else{
+                    currentEle.classList.add(mouseValue);
+                    if(universalGrid){
+                        synchronizeTables(currentEle,'add');
+                    }
+                }
+            
+        }
+    }
+    
+    const handleMoveTouch = e =>{
+        let x = e.pageX;
+        let y = e.pageY;
+        let currentEle = document.elementFromPoint(x,y);
+    
+        if(!currentEle || !currentEle.parentElement || !currentEle.parentElement.classList.contains('row')) return;
+    
+    
+        e.preventDefault();
+    
+        if(!mouseIsPressed) return;
+    
+        //if we are passing currrent table return
+        const currentTableId = currentEle.parentElement.parentElement.parentElement.id;
+        const originalTableId= e.path[0].parentNode.parentNode.parentNode.id;
+        
+        if(currentTableId!=originalTableId){
+            mouseIsPressed = false;
+            mouseValue = (weightIsSelected) ? "weight" :'wall';
+            return;
+        };
+    
+        if(mouseValue==='start' || mouseValue==='end'){
+            if(currentEle.className ==='start' || currentEle.className==='end') return;
+            currentEle.className = mouseValue;
+            setTimeout(()=>{
+                currentEle.className = '';
+            },30)
+    
+            if(universalGrid){
+                synchronizeTables(currentEle,'add-like');
+            }
+            
+    
+        }else{
+            if(currentEle.className ==='start' || currentEle.className=='end') return;
+            if(currentEle.classList.contains(mouseValue)){
+                //currentEle.classList.remove(mouseValue)
+                //console.log('remove wall')
+                return;
+            }else{
+                currentEle.classList.add(mouseValue)
+                if(universalGrid){
+                    synchronizeTables(currentEle,'add');
+                }
+                return;
+            }
+        }
+        
+    }
+    
+    const handleEndTouch = e =>{
+        let x = e.pageX;
+        let y = e.pageY;
+        let currentEle = document.elementFromPoint(x,y);
+    
+        if(!currentEle || !currentEle.parentElement || !currentEle.parentElement.classList.contains('row')) return;
+    
+        e.preventDefault();
+    
+        if(!mouseIsPressed) return;
+    
+        //if we are passing currrent table return
+        const currentTableId = currentEle.parentElement.parentElement.id;
+        const originalTableId= e.path[0].parentNode.parentNode.id;
+        if(currentTableId!=originalTableId) return;
+        
+        if(mouseValue==='start' || mouseValue==='end'){
+    
+            if(currentEle.className ==='start' || currentEle.className=='end') return;
+    
+            currentEle.className = mouseValue;
+            e.path[0].className = '';
+    
+            if(universalGrid){
+                synchronizeTables(currentEle,'add-solid');
+                synchronizeTables(e.path[0],'remove');
+            }
+    
+            //check if start or end is missing in any of the grid return them.
+            for(let table=0;table<allCells.length;table++){
+                let start=null;
+                let end=null;
+                for(let ele=0;ele<allCells[table].length;ele++){
+                    if(allCells[table][ele].classList.contains('start')) start=1
+                    if(allCells[table][ele].classList.contains('end')) end =1
+                }
+                if (start==null){
+                    document.querySelector(`#table-${table+1} #start`).className = 'start';
+                }
+                if (end==null){
+                    document.querySelector(`#table-${table+1} #end`).className = 'end';
+                }
+            }
+    
+            if(weightIsSelected){
+                mouseValue = 'weight';
+            }else{
+                mouseValue = 'wall';
+            }
+        }
+        mouseIsPressed = false;
+    }
+    
+    
+    
+
+
     const table1Element = document.getElementById('table-1');
     const table2Element = document.getElementById('table-2');
     const table3Element = document.getElementById('table-3');
@@ -275,6 +461,23 @@ var universalGrid = false;
                 mouseValue = 'wall';
             }
         })
+
+        //-----------------------------
+        //  Handle touch events for grid
+        //-------------------------------
+        if(window.PointerEvent){
+            table.addEventListener('pointerdown',handleStartTouch);
+            table.addEventListener('pointermove',handleMoveTouch);
+            table.addEventListener('pointerup',handleEndTouch);
+            table.addEventListener('pointercancel',handleEndTouch);
+        }else{
+            table.addEventListener('touchstart',handleStartTouch);
+            table.addEventListener('touchmove',handleMoveTouch);
+            table.addEventListener('touchend',handleEndTouch);
+            table.addEventListener('touchcancel',handleEndTouch);
+        }
+
+
     })
     
 
@@ -697,15 +900,34 @@ visBtn.addEventListener('click',()=>{
         document.querySelector(`.toturial`).classList.add('hidden')
     }
 
-    //inProgress = true;
+    
 
-    let allActiveTablesProgress = []
+
+
+    //check if start or end is missing in any of the grid return them.
+    for(let table=0;table<allCells.length;table++){
+        let start=null;
+        let end=null;
+        for(let ele=0;ele<allCells[table].length;ele++){
+            if(allCells[table][ele].classList.contains('start')) start=1
+            if(allCells[table][ele].classList.contains('end')) end =1
+        }
+        if (start==null){
+            document.querySelector(`#table-${table+1} #start`).className = 'start';
+        }
+        if (end==null){
+            document.querySelector(`#table-${table+1} #end`).className = 'end';
+        }
+    }
+
+
+
+
 
     for(let i=0;i<tables.length;i++){
         if(tables[i].active){
             tables[i].cleanGrid();
             tables[i].runAlgo(diagonalAllowed,mazeSpeed,graphSpeed,manhattanDist);
-            allActiveTablesProgress.push(tables[i].inProgress);
         } 
     }
 
@@ -792,67 +1014,6 @@ document.getElementById('panel-toggle').onclick = e =>{
         }
     }
 }
-
-
-//flip the toturial card on swip 
-/*
-toturial.addEventListener('touchstart',(e)=>{
-    if(e.target.classList.contains('github-link')) return;
-    e.preventDefault();
-    //console.log(e.type);
-})
-
-
-
-toturial.addEventListener('touchmove',(e)=>{
-    if(e.target.classList.contains('github-link')) return;
-    e.preventDefault();
-    //console.log(e.type);
-})
-
-
-
-toturial.addEventListener('touchend',e=>{
-    if(e.target.classList.contains('github-link')) return;
-    e.preventDefault();
-    //console.log(e.target);
-    let currentFace; 
-    if(e.target.classList.contains('front-face')||e.target.classList.contains('back-face')){
-        currentFace = e.target;
-    }else{
-        currentFace = e.target.parentElement;
-    }
-    if(currentFace.classList.contains('toturial')){
-        currentFace = currentFace.children[1];
-    }
-
-    const otherFace = (currentFace.previousElementSibling)? currentFace.previousElementSibling : currentFace.nextElementSibling;
-
-    let frontFace;
-    let backFace;
-    let weAreAtFront;
-
-    if(currentFace.classList.contains('front-face')){
-        frontFace = currentFace;
-        backFace = otherFace;
-        weAreAtFront = true;
-    }else{
-        backFace = currentFace;
-        frontFace = otherFace;
-        weAreAtFront = false;
-    }
-    //console.log(frontFace);
-    if(weAreAtFront){
-        //if we are at front we wanna flip the card like hover
-        backFace.style.transform = ' rotateY(0deg)';
-        frontFace.style.transform = ' rotateY(180deg)';
-    }else{
-        //if we are at back, we wanna get back to normal
-        backFace.style.transform = 'rotateY(-180deg)';
-        frontFace.style.transform = 'rotateY(0deg)';
-    }
-    
-})*/
 
 
 
