@@ -231,7 +231,7 @@ var universalGrid = false;
 
 
 
-    const synchronizeTables = (currentEle,func=null)=>{
+    /*const synchronizeTables = (currentEle,func=null)=>{
         //find table index==table-id -1 and ele index in table that is row*totalcols + col 
         const currentTableId = currentEle.parentElement.parentElement.parentElement.id;
         let idx;
@@ -410,7 +410,7 @@ var universalGrid = false;
             }
         }
         mouseIsPressed = false;
-    }
+    }*/
     
     
     
@@ -465,7 +465,7 @@ var universalGrid = false;
         //-----------------------------
         //  Handle touch events for grid
         //-------------------------------
-        if(window.PointerEvent){
+        /*if(window.PointerEvent){
             table.addEventListener('pointerdown',handleStartTouch);
             table.addEventListener('pointermove',handleMoveTouch);
             table.addEventListener('pointerup',handleEndTouch);
@@ -475,7 +475,7 @@ var universalGrid = false;
             table.addEventListener('touchmove',handleMoveTouch);
             table.addEventListener('touchend',handleEndTouch);
             table.addEventListener('touchcancel',handleEndTouch);
-        }
+        }*/
 
 
     })

@@ -755,7 +755,7 @@ body> input:checked ~  .control-panel button{
     flex: 1;
    /* background-color: #f2f2f2;*/
     border:1px #ccc solid;
-    touch-action: none;
+    /*touch-action: none;*/
 }
 #table-1{
     display: flex;
@@ -970,6 +970,11 @@ body> input:checked ~  .control-panel button{
         left:25rem;
         top:38rem;
     }
+    .instruction-table-cleanbtn{
+        top:5.8rem;   
+    }
+    .instruction-table-time{
+        top:84%;}
 }
 
 
