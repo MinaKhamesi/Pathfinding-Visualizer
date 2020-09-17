@@ -5,6 +5,8 @@
 ![](PathF.gif)
 
 This application visualizes five different pathfinding algorithms and five maze generation algorithms. 
+
+#### Find the live application here:
  ######  [https://minakhamesi.github.io/Pathfinding-Visualizer/](https://minakhamesi.github.io/Pathfinding-Visualizer/)
 
 ###### Five pathfinding algorithm used in this application are:
