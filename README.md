@@ -1,10 +1,11 @@
 ## Path Finding and Maze Generation Algorithm Visualizer
 
- ### built in VanillaJs, HTML and CSS
+ ##### built in VanillaJs, HTML and CSS
 
 ![](PathF.gif)
 
-This application visualizes five different pathfinding algorithms and five maze generation algorithms. try the application [here](https://minakhamesi.github.io/Pathfinding-Visualizer/)
+This application visualizes five different pathfinding algorithms and five maze generation algorithms. 
+ ######  [https://minakhamesi.github.io/Pathfinding-Visualizer/](https://minakhamesi.github.io/Pathfinding-Visualizer/)
 
 ###### Five pathfinding algorithm used in this application are:
 *   Breadth-first-search
