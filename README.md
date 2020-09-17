@@ -12,7 +12,9 @@
 <li> A* algorithm</li>
 <li>greedy best-first search algorithm</li>
 <ul>
-<br/>
+
+
+
 <p>Maze generation algorithms include:</p>
 <ul>
 <li> recursive backtracker algorithm</li>
@@ -21,7 +23,5 @@
 <li>two simple matrix traversal algorithm.</li>
 <ul>
 
-![](git.gif)
 
-<a target:'_blank' src='https://minakhamesi.github.io/Pathfinding-Visualizer/'>Try Application Here
-</a>
+
