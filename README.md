@@ -21,7 +21,7 @@
 <li>two simple matrix traversal algorithm.</li>
 <ul>
 
-<iframe src='//gifs.com/embed/pathfinding-app-minakhamesi-3QNmM9' frameborder='0' scrolling='no' width='1920px' height='1080px' style='-webkit-backface-visibility: hidden;-webkit-transform: scale(1);' ></iframe>
+![Farmers Market Finder Demo](https://j.gifs.com/3QNmM9.gif)
 
 <a target:'_blank' src='https://minakhamesi.github.io/Pathfinding-Visualizer/'>Try Application Here
 </a>
