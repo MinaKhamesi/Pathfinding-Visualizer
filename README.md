@@ -21,7 +21,7 @@
 <li>two simple matrix traversal algorithm.</li>
 <ul>
 
-![Farmers Market Finder Demo](https://j.gifs.com/3QNmM9.gif)
+![](git.gif)
 
 <a target:'_blank' src='https://minakhamesi.github.io/Pathfinding-Visualizer/'>Try Application Here
 </a>
