@@ -20,6 +20,9 @@ This application visualizes five different pathfinding algorithms and five maze 
 *  two simple matrix traversal algorithm.
 
 
+###### application on mobile devices
+![](mobile.gif)
+
 
 
 
